@@ -1,50 +1,56 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+//import logo from './logo.svg';
 import './App.css';
 import Display from './components/display';
+import { fetchDaysRequest, fetchDaysSuccess, fetchDaysError } from './actions/actions_api';
+
 
 class App extends Component {
 
-  constructor(props) {
+  
 
-    super(props);
+  componentDidMount(){
 
-    this.state = {
-
-      names : [
-
-        'User 1',
-        'User 2',
-        'User 3'
-   
-      ]
-
-
-    }
+    this.props.dispatch(fetchDaysRequest());
  
-  }
-
-
-
-
-
+ }
+  
   render() {
     return (
 
       <div>
         <h1>Testing...</h1>
-        <Display users = { this.state.names }/>
+        <Display days = { this.props.days }/>
 
       </div>
       
     );
   }
+
+
+}
+ 
+//export default App;
+
+const mapStateToProps = state => {
+
+  console.log('state >>> ',state);
+
+  return {
+
+    days: state.days
+
+  }
+ 
 }
 
-export default App;
+
+export default connect(mapStateToProps)(App);
 
 
-/*
+
+/* REF
 
 <Display users = { this.state.users }/>
 

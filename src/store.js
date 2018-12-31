@@ -1,14 +1,16 @@
-// import { createStore,applyMiddleware } from 'redux';
-// import thunk from 'redux-thunk';
+import { createStore,applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
-// //reducers
+//reducers
+import { daysReducer } from './reducers/daysReducer';
 
-// export default createStore(
+
+export default createStore(
   
-//   // userReducer,
-//   // applyMiddleware(thunk)
+  daysReducer,
+  applyMiddleware(thunk)
  
 
-// )
+)
 
  
