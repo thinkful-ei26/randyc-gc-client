@@ -2,12 +2,14 @@ import { createStore,applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 //reducers
-import { daysReducer } from './reducers/daysReducer';
+import { usersReducer } from './reducers/usersReducer.js';
+import { blocksReducer } from './reducers/blocksReducer.js';
+import rootReducer from './reducers/rootReducer.js';
 
 
 export default createStore(
   
-  daysReducer,
+  rootReducer,
   applyMiddleware(thunk)
  
 

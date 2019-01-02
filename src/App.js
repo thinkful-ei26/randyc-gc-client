@@ -1,28 +1,72 @@
 import React, { Component } from 'react';
+import moment from 'moment';//for datePicker
+
 import { connect } from 'react-redux';
 //import logo from './logo.svg';
 import './App.css';
 import Display from './components/display';
-import { fetchDaysRequest, fetchDaysSuccess, fetchDaysError } from './actions/actions_api';
+import DateInput from './components/date-input';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
+//Actions
+import { fetchUsersRequest, fetchUsersSuccess, fetchUsersError } from './actions/actions-users-api';
+import { fetchBlocksRequest, fetchBlocksSuccess, fetchBlocksError } from './actions/actions-blocks-api';
+
+//date stuff
+const formatDate = date => moment(date).format("MMMM Do YYYY, h:mm:ss a");//this gets the date object
 
 class App extends Component {
 
-  
+  constructor(props) {
+    super(props);
 
+    this.state = {
+
+      inputDay: '',
+      inputStartDate: '',
+      inputEndDate: ''
+ 
+    }
+
+
+  }
+
+
+ 
   componentDidMount(){
 
-    this.props.dispatch(fetchDaysRequest());
+    this.props.dispatch(fetchUsersRequest());
+    this.props.dispatch(fetchBlocksRequest());
  
  }
+
+ //test day select
+ handleSelect = day => {
+ 
+  console.log('this is the day selector> ',day);
+   
+};
   
   render() {
+
+    console.log('props >>. ', this.props);
+
     return (
 
       <div>
-        <h1>Testing...</h1>
-        <Display days = { this.props.days }/>
-
+        <div className = "centerStuff" >
+        <h3>Test... get all current Users & ids...</h3>
+        {/* <div>here: { this.props.users }</div> */}
+        <Display users = { this.props.users } blocks = { this.props.blocks }/>
+        {/* <DateInput day = { this.props.blocks }/> */}
+        <DatePicker
+          todayButton={"Today"} 
+          onSelect={ this.handleSelect } //when day is clicked
+          dateFormat="MMMM d, yyyy h:mm aa"
+          timeCaption="time"
+        />
+       </div>
       </div>
       
     );
@@ -35,11 +79,12 @@ class App extends Component {
 
 const mapStateToProps = state => {
 
-  console.log('state >>> ',state);
+  console.log('state in App.js >>> ',state);
 
   return {
 
-    days: state.days
+    users: state.usersReducer.users,
+    blocks: state.blocksReducer.blocks
 
   }
  
@@ -48,27 +93,3 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(App);
 
-
-
-/* REF
-
-<Display users = { this.state.users }/>
-
-<div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-
-      */
