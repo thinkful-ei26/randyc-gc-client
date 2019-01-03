@@ -55,9 +55,7 @@ console.log('newDay ? ',props.setDay);
     <ul>
       { showBlocksAndIds }
     </ul>
-    <ul>
-    the Day is: { props.inputDay } 
-    </ul> 
+    
   </div>
 
   )
