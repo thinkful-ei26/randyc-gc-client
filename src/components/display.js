@@ -1,10 +1,16 @@
 //
 import React from 'react';
+ 
 
 export default function Display(props) {
 
   //console.log('props in Display... ',props);
- 
+  
+  // const newDay = props.setDay;
+
+console.log('newDay ? ',props.setDay);
+
+
   //show users -- testing API
   const showUsersAndIds = props.users.map((user,index) => {
 
@@ -49,7 +55,9 @@ export default function Display(props) {
     <ul>
       { showBlocksAndIds }
     </ul>
-
+    <ul>
+    the Day is: { props.inputDay } 
+    </ul> 
   </div>
 
   )
