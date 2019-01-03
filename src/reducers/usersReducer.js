@@ -10,6 +10,7 @@ import {
 
 const initialState = {
 
+  userId:'1234',
   users: [{
 
     _id: 'test id',

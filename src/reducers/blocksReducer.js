@@ -26,6 +26,8 @@ const initialState = {
 
 export function blocksReducer(state=initialState,action) {
 
+
+  //GET BLOCKS
   if(action.type === FETCH_BLOCKS_REQUEST){
 
       return Object.assign({}, state, {
@@ -36,13 +38,8 @@ export function blocksReducer(state=initialState,action) {
  
   }
 
-
-
   if(action.type === FETCH_BLOCKS_SUCCESS){
-
-
-    
-
+ 
     return Object.assign({}, state, {
 
       blocks: [...state.blocks,...action.data],
@@ -54,10 +51,47 @@ export function blocksReducer(state=initialState,action) {
 
   }
 
-
   if(action.type === FETCH_BLOCKS_ERROR){
 
     return Object.assign({}, state, {
+
+      loading: false,
+      error: action.error
+
+    })
+
+
+  }
+
+  //POST BLOCK
+  if(action.type === POST_BLOCK_REQUEST){
+
+    return Object.assign({}, state, {
+
+      loading : true
+ 
+    })
+
+
+  }
+
+  if(action.type === POST_BLOCK_SUCCESS){
+
+    console.log('post block reducer!');
+
+    // return Object.assign({}, state, {
+
+    //   startDate: action.
+
+    //   loading : false
+
+    // })
+
+  }
+
+  if(action.type === POST_BLOCK_ERROR){
+
+    return Object.assign({},state,{
 
       loading: false,
       error: action.error

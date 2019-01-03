@@ -11,18 +11,28 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 //Actions
 import { fetchUsersRequest, fetchUsersSuccess, fetchUsersError } from './actions/actions-users-api';
-import { fetchBlocksRequest, fetchBlocksSuccess, fetchBlocksError } from './actions/actions-blocks-api';
+import { fetchBlocksRequest, fetchBlocksSuccess, fetchBlocksError, postBlockRequest } from './actions/actions-blocks-api';
 import { setStartDay, setEndDay } from './actions/actions-input';
  
 
 //date stuff
+let date = null;
 const formatDate = date => moment(date).format("MMMM Do YYYY, h:mm:ss a");//this gets the date object
 const formatMonthDay = date => moment(date).format("MMMM Do YYYY");
-const getTheDay = date => date.getDay();
+ 
+const formatTime = date => moment(date).format("HH:mm a");
 
 class App extends Component {
 
-  
+  state = {
+
+    startDate :null,
+    endDate :null,
+    dayOfTheWeek: null,
+    inputStartTime: null,
+    inputEndTime: null
+
+  };
 
   componentDidMount(){
 
@@ -34,26 +44,62 @@ class App extends Component {
  //set start day & time
  handleStartSelect = day => {
  
-  //send full date for title
-  this.props.dispatch(setStartDay(day));
+    const justDay = formatMonthDay(day);
+    const justDayNumbner = day.getDay();
+    let theDay = '';
+
+    const justStartTime = formatTime(day);
+
+    // Sunday - Saturday : 0 - 6
+    if(justDayNumbner === 0){ theDay = 'Sunday';}
+    if(justDayNumbner === 1){ theDay = 'Monday';}
+    if(justDayNumbner === 2){ theDay = 'Tuesday';}
+    if(justDayNumbner === 3){ theDay = 'Wednesday';}
+    if(justDayNumbner === 4){ theDay = 'Thursday';}
+    if(justDayNumbner === 5){ theDay = 'Friday';}
+    if(justDayNumbner === 6){ theDay = 'Saturday';}
+
+
+   
+  this.setState({
+
+    inputDay: justDay,
+    startDate : day,
+    endDate: day,
+    dayOfTheWeek : theDay,
+    inputStartTime: justStartTime
+     
+  })
   
 };
 
 //set end day & time
 handleEndSelect = day => {
  
-  //send full date for title
-  this.props.dispatch(setEndDay(day));
+  const justEndtTime = formatTime(day);  
+
+  this.setState({
+
+    inputEndTime: justEndtTime,
+    endDate: day
+
+  })
   
 };
 
 handleSaveButton = () => {
 
-  console.log('submit data');
+  console.log('state',this.state);
+
+  this.props.dispatch(postBlockRequest({
+
+    startDate: this.state.startDate,
+    endDate: this.state.endDate
+
+  }));
  
 }
-
-
+ 
   
   render() {
 
@@ -68,21 +114,13 @@ handleSaveButton = () => {
         <Display
          users = { this.props.users }
          blocks = { this.props.blocks }
-         inputDay = { this.props.inputDay }
-         dayOfTheWeek = { this.props.dayOfTheWeek }
-         inputStartTime = { this.props.inputStartTime }
-
-         />
+        />
         Select Start time for block:
         <DatePicker
           todayButton={"Today"} 
   
-          // selected={this.props.inputStartDate}
+          selected={ this.state.startDate }
           onChange={this.handleStartSelect}
-
-          //onChange={this.handleDaySelect} //works for both time and date
- 
-          //onSelect={ this.handleDaySelect } //when day is clicked
 
           dateFormat="MMMM d, yyyy h:mm aa"
           timeCaption="time"
@@ -91,7 +129,6 @@ handleSaveButton = () => {
           timeIntervals={30}
         />
 
-        {/* {this.props.inputDay} */}
           
        </div>
        <hr />
@@ -99,7 +136,10 @@ handleSaveButton = () => {
        Select End time for block:
        <DatePicker
           todayButton={"Today"} 
+
+          selected={this.state.endDate}
           onChange={this.handleEndSelect} 
+
           showTimeSelect
           dateFormat="MMMM d, yyyy h:mm aa"
           timeCaption="time"
@@ -111,9 +151,10 @@ handleSaveButton = () => {
        </div>
        <hr />
        <div className = "centerStuff">
-       The selected Day is: { this.props.dayOfTheWeek } { this.props.inputDay }<br/>
-          The start time is: {this.props.inputStartTime}<br/>
-          The end time is: {this.props.inputEndTime}
+       The current user id is: {this.props.userId }<br/>
+       The selected Day is { this.state.dayOfTheWeek } { this.state.inputDay }<br/>
+          The start time is: {this.state.inputStartTime}<br/>
+          The end time is: {this.state.inputEndTime}
           <br/>
           <button onClick= { this.handleSaveButton }>SAVE</button>
        </div>
@@ -137,10 +178,7 @@ const mapStateToProps = state => {
 
     users: state.usersReducer.users,
     blocks: state.blocksReducer.blocks,
-    inputDay: state.inputReducer.inputDay,
-    dayOfTheWeek: state.inputReducer.dayOfTheWeek,
-    inputStartTime: state.inputReducer.inputStartTime,
-    inputEndTime: state.inputReducer.inputEndTime
+    userId: state.usersReducer.userId
 
 
   }
@@ -150,3 +188,8 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(App);
 
+
+    // inputDay: state.inputReducer.inputDay,
+    // dayOfTheWeek: state.inputReducer.dayOfTheWeek,
+    // inputStartTime: state.inputReducer.inputStartTime,
+    // inputEndTime: state.inputReducer.inputEndTime
