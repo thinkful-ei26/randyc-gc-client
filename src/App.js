@@ -88,7 +88,7 @@ handleEndSelect = day => {
   
 };
 
-//SAVE BLOCK
+//SAVE BLOCK as new or after EDIT
 handleSaveButton = () => {
 
   console.log('state',this.state);
