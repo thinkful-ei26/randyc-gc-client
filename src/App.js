@@ -10,20 +10,22 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 //Actions
-import { fetchUsersRequest, fetchUsersSuccess, fetchUsersError } from './actions/actions-users-api';
-import { fetchBlocksRequest, fetchBlocksSuccess, fetchBlocksError, postBlockRequest } from './actions/actions-blocks-api';
+import { fetchUsersRequest } from './actions/actions-users-api';
+import
+ { fetchBlocksRequest,postBlockRequest,deleteBlockRequest } from './actions/actions-blocks-api';
 import { setStartDay, setEndDay } from './actions/actions-input';
- 
+import { formatDate } from './utils/date';
 
 //date stuff
 let date = null;
-const formatDate = date => moment(date).format("MMMM Do YYYY, h:mm:ss a");//this gets the date object
+
 const formatMonthDay = date => moment(date).format("MMMM Do YYYY");
  
 const formatTime = date => moment(date).format("HH:mm a");
 
 class App extends Component {
 
+  //local state... for user input
   state = {
 
     startDate :null,
@@ -75,6 +77,18 @@ class App extends Component {
 
 //set end day & time
 handleEndSelect = day => {
+
+  if(day <= this.state.startDate){
+
+    console.log('end is less than!');
+
+    if(window.confirm('End time cannot be less than start time, re-enter please...')){
+
+      day = this.state.startDate;
+
+    }
+
+  }
  
   const justEndtTime = formatTime(day);  
 
@@ -100,6 +114,20 @@ handleSaveButton = () => {
  
 }
  
+
+handleDeleteClicked = (blockid) => {
+
+  console.log('delete this',blockid);
+  //need to get Block id...
+
+  if(window.confirm('Are you sure?')){
+
+    this.props.dispatch(deleteBlockRequest(blockid));
+
+  }
+   
+}
+
   
   render() {
 
@@ -114,17 +142,18 @@ handleSaveButton = () => {
         <Display
          users = { this.props.users }
          blocks = { this.props.blocks }
+         onDelete = { this.handleDeleteClicked }
         />
-        Select Start time for block:
+        Select Start time for block: 
         <DatePicker
           todayButton={"Today"} 
   
           selected={ this.state.startDate }
           onChange={this.handleStartSelect}
 
+          showTimeSelect
           dateFormat="MMMM d, yyyy h:mm aa"
           timeCaption="time"
-          showTimeSelect
           timeFormat="HH:mm aa"
           timeIntervals={30}
         />
@@ -139,7 +168,8 @@ handleSaveButton = () => {
 
           selected={this.state.endDate}
           onChange={this.handleEndSelect} 
-
+          minDate={this.state.startDate}
+          maxDate={this.state.startDate}
           showTimeSelect
           dateFormat="MMMM d, yyyy h:mm aa"
           timeCaption="time"
@@ -152,8 +182,9 @@ handleSaveButton = () => {
        <hr />
        <div className = "centerStuff">
        The current user id is: {this.props.userId }<br/>
-       The selected Day is { this.state.dayOfTheWeek } { this.state.inputDay }<br/>
-          The start time is: {this.state.inputStartTime}<br/>
+       The selected day is { formatDate(this.state.startDate)}<br/>
+       {/* The selected Day is { this.state.dayOfTheWeek } { this.state.inputDay }<br/> */}
+          The start time is: {formatTime(this.state.startDate)}<br/>
           The end time is: {this.state.inputEndTime}
           <br/>
           <button onClick= { this.handleSaveButton }>SAVE</button>
@@ -165,6 +196,8 @@ handleSaveButton = () => {
     );
   }
 
+
+  
 
 }
  

@@ -1,5 +1,7 @@
 //
 import React from 'react';
+import { formatDate } from '../utils/date';
+
  
 
 export default function Display(props) {
@@ -31,9 +33,9 @@ console.log('newDay ? ',props.setDay);
       <li>
         user id: { block.userRef} <br/>
         block id: { block._id } <br/>
-        start date: { block.startDate} <br/>
-        end date: { block.endDate} <br/>
-        ....
+        start date: { formatDate(block.startDate)} <br/>
+        end date: { formatDate(block.endDate)} <br/>
+        <button onClick={() =>{props.onDelete(block._id)}} >DELETE</button><br/>...<br/>
       </li>
 
 

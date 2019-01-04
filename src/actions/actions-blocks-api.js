@@ -72,10 +72,7 @@ return fetch(`${API_BASE_URL}/blocks/post`, {
   .catch(error => console.log(error))
    
 }//
-   
-
- 
-
+  
 export const POST_BLOCK_SUCCESS = 'POST_BLOCK_SUCCESS';
 export const postBlockSuccess = (data) => {
 
@@ -90,8 +87,7 @@ export const postBlockSuccess = (data) => {
   }
  
 }
-
-
+ 
 export const POST_BLOCK_ERROR = 'POST_BLOCK_ERROR';
 export const postBlockError = (error) => {
 
@@ -103,4 +99,41 @@ export const postBlockError = (error) => {
   }
  
 }
+
+
+//DELETE a block 
+export const DELETE_BLOCK_REQUEST = 'DELETE_BLOCK_REQUEST';
+export const deleteBlockRequest = (blockid) => (dispatch) => {
+
+  return fetch(`${API_BASE_URL}/blocks/delete/${blockid}`, {
+
+    method: 'DELETE',
+    headers: {
+
+      'content-type' : 'application/json'
+
+    }
+     
+  })
+  .then(() => dispatch(deleteBlockSuccess(blockid)))
+  .catch(error => console.log(error))
+
+
+}//
+
+export const DELETE_BLOCK_SUCCESS = 'DELETE_BLOCK_SUCCESS';
+export const deleteBlockSuccess = (blockid) => {
+
+  console.log('delete success');
+
+  return {
+
+    type: 'DELETE_BLOCK_SUCCESS',
+    blockid
+
+  }
+
+
+}
+
 
