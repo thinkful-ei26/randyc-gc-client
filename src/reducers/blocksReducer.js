@@ -15,10 +15,10 @@ const initialState = {
 
   blocks: [{
 
-    _id: 'test 1 block id',
-    userRef: 'test 1 user id',
-    startDate: 'test 1 block start',
-    endDate: 'test 1 block end'
+    _id: null,
+    userRef: null,
+    startDate: null,
+    endDate: null
      
   }],
   loading: false,

@@ -1,6 +1,6 @@
 //
 import React from 'react';
-import { formatDate } from '../utils/date';
+import { formatDate, formatTime } from '../utils/date';
 
  
 
@@ -27,19 +27,27 @@ console.log('newDay ? ',props.setDay);
   })
 
   const showBlocksAndIds = props.blocks.map((block,index) => {
+    
+    //only show blocks when they are there...
+    if(block.userRef){
 
-    return (
+      return (
 
-      <li>
-        user id: { block.userRef} <br/>
-        block id: { block._id } <br/>
-        start date: { formatDate(block.startDate)} <br/>
-        end date: { formatDate(block.endDate)} <br/>
-        <button onClick={() =>{props.onDelete(block._id)}} >DELETE</button><br/>...<br/>
-      </li>
+        <li>
+          user id: { block.userRef} <br/>
+          block id: { block._id } <br/>
+          start date: { formatDate(block.startDate)} <br/>
+          end date: { formatDate(block.endDate)} <br/>
+          block is from: {formatTime(block.startDate)} - {formatTime(block.endDate)} <br/>
+          <button onClick={() =>{props.onDelete(block._id)}} >DELETE</button><br/>...<br/>
+        </li>
+  
+  
+      )
+ 
+    }
 
-
-    )
+    
 
 
   })

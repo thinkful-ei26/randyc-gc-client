@@ -14,25 +14,23 @@ import { fetchUsersRequest } from './actions/actions-users-api';
 import
  { fetchBlocksRequest,postBlockRequest,deleteBlockRequest } from './actions/actions-blocks-api';
 import { setStartDay, setEndDay } from './actions/actions-input';
-import { formatDate } from './utils/date';
+import { formatDate, formatTime } from './utils/date';
 
 //date stuff
 let date = null;
 
 const formatMonthDay = date => moment(date).format("MMMM Do YYYY");
  
-const formatTime = date => moment(date).format("HH:mm a");
+//const formatTime = date => moment(date).format("HH:mm a");
 
 class App extends Component {
 
   //local state... for user input
   state = {
 
-    startDate :null,
-    endDate :null,
-    dayOfTheWeek: null,
-    inputStartTime: null,
-    inputEndTime: null
+    startDate : new Date(),
+    endDate : new Date()
+     
 
   };
 
@@ -46,30 +44,10 @@ class App extends Component {
  //set start day & time
  handleStartSelect = day => {
  
-    const justDay = formatMonthDay(day);
-    const justDayNumbner = day.getDay();
-    let theDay = '';
-
-    const justStartTime = formatTime(day);
-
-    // Sunday - Saturday : 0 - 6
-    if(justDayNumbner === 0){ theDay = 'Sunday';}
-    if(justDayNumbner === 1){ theDay = 'Monday';}
-    if(justDayNumbner === 2){ theDay = 'Tuesday';}
-    if(justDayNumbner === 3){ theDay = 'Wednesday';}
-    if(justDayNumbner === 4){ theDay = 'Thursday';}
-    if(justDayNumbner === 5){ theDay = 'Friday';}
-    if(justDayNumbner === 6){ theDay = 'Saturday';}
-
-
-   
+     
   this.setState({
 
-    inputDay: justDay,
-    startDate : day,
-    endDate: day,
-    dayOfTheWeek : theDay,
-    inputStartTime: justStartTime
+    startDate: day
      
   })
   
@@ -89,14 +67,12 @@ handleEndSelect = day => {
     }
 
   }
- 
-  const justEndtTime = formatTime(day);  
+  
 
   this.setState({
 
-    inputEndTime: justEndtTime,
     endDate: day
-
+     
   })
   
 };
@@ -137,25 +113,48 @@ handleDeleteClicked = (blockid) => {
 
       <div>
         <div className = "centerStuff" >
-        <h3>Test... get all current Users & ids...</h3>
-        
-        <Display
-         users = { this.props.users }
-         blocks = { this.props.blocks }
-         onDelete = { this.handleDeleteClicked }
-        />
-        Select Start time for block: 
+          <br/>
+          The current user id is: {this.props.userId }<br/>
+          The selected day is { formatDate(this.state.startDate)}<br/>
+          The start time is: {formatTime(this.state.startDate)}<br/>
+          The end time is: {formatTime(this.state.endDate)}
+          <br/>
+          <button onClick= { this.handleSaveButton }>SAVE</button>
+          <br/>
+          <br/>
+
+        Select Start Month/Day: 
         <DatePicker
           todayButton={"Today"} 
   
           selected={ this.state.startDate }
           onChange={this.handleStartSelect}
 
+          dateFormat="MMMM d, yyyy"
+          
+        />
+        <hr />
+        
+        Select Start time for block: 
+        <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleStartSelect}
           showTimeSelect
-          dateFormat="MMMM d, yyyy h:mm aa"
-          timeCaption="time"
-          timeFormat="HH:mm aa"
-          timeIntervals={30}
+          showTimeSelectOnly
+          timeIntervals={15}
+          dateFormat="h:mm aa"
+          timeCaption="Time"
+
+          // todayButton={"Today"} 
+  
+          // selected={ this.state.startDate }
+          // onChange={this.handleStartSelect}
+
+          // showTimeSelect
+          // dateFormat="MMMM d, yyyy h:mm aa"
+          // timeCaption="time"
+          // timeFormat="HH:mm aa"
+          // timeIntervals={30}
         />
 
           
@@ -163,34 +162,59 @@ handleDeleteClicked = (blockid) => {
        <hr />
        <div className = "centerStuff">
        Select End time for block:
-       <DatePicker
-          todayButton={"Today"} 
+       { <DatePicker
 
           selected={this.state.endDate}
-          onChange={this.handleEndSelect} 
-          minDate={this.state.startDate}
-          maxDate={this.state.startDate}
+          onChange={this.handleEndSelect}
           showTimeSelect
-          dateFormat="MMMM d, yyyy h:mm aa"
-          timeCaption="time"
-          timeFormat="HH:mm aa"
-          timeIntervals={30}
+          showTimeSelectOnly
+          timeIntervals={15}
+          dateFormat="h:mm aa"
+          timeCaption="Time"
+          // todayButton={"Today"} 
 
-       ></DatePicker>
+          // selected={this.state.endDate}
+          // onChange={this.handleEndSelect} 
+          // minDate={this.state.startDate}
+          // maxDate={this.state.startDate}
+          // showTimeSelect
+          // dateFormat="MMMM d, yyyy h:mm aa"
+          // timeCaption="time"
+          // timeFormat="HH:mm aa"
+          // timeIntervals={30}
+
+
+
+       ></DatePicker> 
+      
+        
+      
+      
+      
+      
+      
+      
+      }
 
        </div>
        <hr />
-       <div className = "centerStuff">
-       The current user id is: {this.props.userId }<br/>
-       The selected day is { formatDate(this.state.startDate)}<br/>
-       {/* The selected Day is { this.state.dayOfTheWeek } { this.state.inputDay }<br/> */}
-          The start time is: {formatTime(this.state.startDate)}<br/>
-          The end time is: {this.state.inputEndTime}
-          <br/>
-          <button onClick= { this.handleSaveButton }>SAVE</button>
-       </div>
 
-      
+       <DatePicker
+        inline
+        selected={this.state.startDate}
+         
+        />
+
+      <h3>Test... get all current Users, Blocks & ids...</h3>
+        
+        <Display
+         users = { this.props.users }
+         blocks = { this.props.blocks }
+         onDelete = { this.handleDeleteClicked }
+        />  
+
+
+        
       </div>
       
     );
