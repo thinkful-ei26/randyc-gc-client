@@ -16,6 +16,7 @@ console.log('newDay ? ',props.setDay);
   //show users -- testing API
   const showUsersAndIds = props.users.map((user,index) => {
 
+     
     return (
 
       <li>
@@ -28,9 +29,10 @@ console.log('newDay ? ',props.setDay);
 
   const showBlocksAndIds = props.blocks.map((block,index) => {
     
-    //only show blocks when they are there...
-    if(block.userRef){
+    
+      if(block.userRef){
 
+       
       return (
 
         <li>
@@ -39,17 +41,17 @@ console.log('newDay ? ',props.setDay);
           start date: { formatDate(block.startDate)} <br/>
           end date: { formatDate(block.endDate)} <br/>
           block is from: {formatTime(block.startDate)} - {formatTime(block.endDate)} <br/>
-          <button onClick={() =>{props.onDelete(block._id)}} >DELETE</button><br/>...<br/>
+          <button onClick={() => {props.onEdit(block._id)}}>EDIT</button> ... <button onClick={() =>{props.onDelete(block._id)}} >DELETE</button>
+          <br/>...<br/>
         </li>
   
   
       )
  
-    }
 
-    
+      }
 
-
+      
   })
 
 
@@ -57,13 +59,16 @@ console.log('newDay ? ',props.setDay);
   return (
   <div>
 
-    <ul>
-     { showUsersAndIds }
+    
+
+    <p>Blocks:</p>
+    <ul className = 'blocksList'>
+      { showBlocksAndIds }
     </ul>
 
-    <h3>Block testing...</h3>
-    <ul>
-      { showBlocksAndIds }
+    
+    <ul className = 'blocksList'>Users:
+     { showUsersAndIds }
     </ul>
     
   </div>

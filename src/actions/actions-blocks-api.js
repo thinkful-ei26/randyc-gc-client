@@ -100,6 +100,47 @@ export const postBlockError = (error) => {
  
 }
 
+//PUT --> EDIT AN EXISTING BLOCK
+export const PUT_BLOCK_REQUEST = 'PUT_BLOCK_REQUEST';
+export const putBlockRequest = (block) => (dispatch,getState) => {
+ 
+  console.log('put block request!', getState().usersReducer.userId);
+  block.userRef = getState().usersReducer.userId;
+
+  console.log('the put object!', block);
+ 
+  return fetch(`${API_BASE_URL}/blocks/put/${block._id}`, {
+
+    method: 'PUT',
+    body: JSON.stringify(block),
+    headers: {
+
+      'content-type' : 'application/json'
+
+    }
+ 
+  })
+  .then(res => res.json())
+  .then(() => dispatch(putBlockSuccess(block)))
+  .catch(error => console.log(error))
+
+
+}
+
+export const PUT_BLOCK_SUCCESS = 'PUT_BLOCK_SUCCESS';
+export const putBlockSuccess = (block) => {
+  
+  console.log('put block!>>> ', block);
+
+  return {
+
+    type: 'PUT_BLOCK_SUCCESS',
+    block
+
+  }
+
+}
+
 
 //DELETE a block 
 export const DELETE_BLOCK_REQUEST = 'DELETE_BLOCK_REQUEST';

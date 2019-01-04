@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import moment from 'moment';//for datePicker
+
+import FullCalendar from 'fullcalendar-reactwrapper';
 
 import { connect } from 'react-redux';
 //import logo from './logo.svg';
@@ -12,9 +15,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 //Actions
 import { fetchUsersRequest } from './actions/actions-users-api';
 import
- { fetchBlocksRequest,postBlockRequest,deleteBlockRequest } from './actions/actions-blocks-api';
+ { fetchBlocksRequest,postBlockRequest,putBlockRequest,deleteBlockRequest } from './actions/actions-blocks-api';
 import { setStartDay, setEndDay } from './actions/actions-input';
 import { formatDate, formatTime } from './utils/date';
+
+
 
 //date stuff
 let date = null;
@@ -28,8 +33,12 @@ class App extends Component {
   //local state... for user input
   state = {
 
-    startDate : new Date(),
-    endDate : new Date()
+    mode: 'ADD',
+    modeMessage: 'Click below to ADD a new time block',
+    buttonLabel: 'SAVE',
+    startDate : null,
+    endDate : null,
+    captureBlockId: null
      
 
   };
@@ -47,7 +56,8 @@ class App extends Component {
      
   this.setState({
 
-    startDate: day
+    startDate: day,
+    endDate: day
      
   })
   
@@ -56,6 +66,7 @@ class App extends Component {
 //set end day & time
 handleEndSelect = day => {
 
+  //has to be a better way...
   if(day <= this.state.startDate){
 
     console.log('end is less than!');
@@ -77,20 +88,92 @@ handleEndSelect = day => {
   
 };
 
+//SAVE BLOCK
 handleSaveButton = () => {
 
   console.log('state',this.state);
 
-  this.props.dispatch(postBlockRequest({
+  this.setState({
+ 
+      mode: 'ADD',
+      modeMessage: 'Click below to ADD a new time block',
+      buttonLabel: 'SAVE',
+      startDate : null,
+      endDate : null,
+      captureBlockId: null
+    
+  })
 
-    startDate: this.state.startDate,
-    endDate: this.state.endDate
+  if(this.state.mode === 'ADD'){
 
-  }));
+    this.props.dispatch(postBlockRequest({
+      
+      startDate: this.state.startDate,
+      endDate: this.state.endDate
+  
+    }));
+
+ 
+  }
+
+
+  if(this.state.mode === 'EDIT'){
+
+    this.props.dispatch(putBlockRequest({
+      
+      _id: this.state.captureBlockId,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate
+  
+    }));
+ 
+  }
+
+  
  
 }
+
+//EDIT BLOCK
+handleEditClicked = (blockid) => {
+
+  console.log('edit this',blockid);
+
+  let editStartTime;
+  let editEndTime;
+  let editBlockId;
+  
+
+  //for local state to show in selected fields
+  const findObject = this.props.blocks.map((block) => {
+    
+    if(blockid === block._id){
+ 
+        editStartTime = block.startDate;
+        editEndTime = block.endDate;
+        editBlockId = block._id;
+         
+    }
+     
+
+  });
  
 
+  this.setState({
+
+    mode: 'EDIT',
+    modeMessage: 'Click below to EDIT the existing current time block',
+    buttonLabel: 'SAVE YOUR EDITED BLOCK',
+    startDate : editStartTime,
+    endDate : editEndTime,
+    captureBlockId: editBlockId
+
+  })
+
+
+}
+
+ 
+//DELETE BLOCK
 handleDeleteClicked = (blockid) => {
 
   console.log('delete this',blockid);
@@ -114,14 +197,14 @@ handleDeleteClicked = (blockid) => {
       <div>
         <div className = "centerStuff" >
           <br/>
+          <h3> { this.state.modeMessage } </h3>
+          
           The current user id is: {this.props.userId }<br/>
           The selected day is { formatDate(this.state.startDate)}<br/>
           The start time is: {formatTime(this.state.startDate)}<br/>
           The end time is: {formatTime(this.state.endDate)}
           <br/>
-          <button onClick= { this.handleSaveButton }>SAVE</button>
-          <br/>
-          <br/>
+          
 
         Select Start Month/Day: 
         <DatePicker
@@ -129,6 +212,7 @@ handleDeleteClicked = (blockid) => {
   
           selected={ this.state.startDate }
           onChange={this.handleStartSelect}
+          placeholderText="Select a start Day"
 
           dateFormat="MMMM d, yyyy"
           
@@ -144,73 +228,71 @@ handleDeleteClicked = (blockid) => {
           timeIntervals={15}
           dateFormat="h:mm aa"
           timeCaption="Time"
-
-          // todayButton={"Today"} 
-  
-          // selected={ this.state.startDate }
-          // onChange={this.handleStartSelect}
-
-          // showTimeSelect
-          // dateFormat="MMMM d, yyyy h:mm aa"
-          // timeCaption="time"
-          // timeFormat="HH:mm aa"
-          // timeIntervals={30}
+ 
         />
 
           
        </div>
+
        <hr />
        <div className = "centerStuff">
        Select End time for block:
        { <DatePicker
 
-          selected={this.state.endDate}
+          
           onChange={this.handleEndSelect}
+          // placeholderText="Select an end time" not working yet
+          selected={this.state.endDate}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
+          // minTime={this.state.startDate}
+          // maxTime={new Date()}
           dateFormat="h:mm aa"
           timeCaption="Time"
-          // todayButton={"Today"} 
-
-          // selected={this.state.endDate}
-          // onChange={this.handleEndSelect} 
-          // minDate={this.state.startDate}
-          // maxDate={this.state.startDate}
-          // showTimeSelect
-          // dateFormat="MMMM d, yyyy h:mm aa"
-          // timeCaption="time"
-          // timeFormat="HH:mm aa"
-          // timeIntervals={30}
-
+          
 
 
        ></DatePicker> 
       
-        
-      
-      
-      
-      
-      
-      
       }
 
-       </div>
+
        <hr />
+       <button onClick= { this.handleSaveButton }>{this.state.buttonLabel}</button>
+          <br/>
+          <br/>
+      <hr/>
+       FULL CALENDAR WILL GO HERE TO SHOW THE DAY/HOUR BLOCKS
+       {/* <FullCalendar
+             id = "your-custom-ID"
+            header = {{
+            left: 'prev,next today myCustomButton',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+            }}
+            defaultDate={this.state.startDate}
+            navLinks= {true} // can click day/week names to navigate views
+            editable= {true}
+            eventLimit= {true} // allow "more" link when too many events
+            events = {this.state.startDate}	
+        >
+        </FullCalendar> */}
+        <hr /> 
 
-       <DatePicker
-        inline
-        selected={this.state.startDate}
-         
-        />
 
-      <h3>Test... get all current Users, Blocks & ids...</h3>
+       </div>
+       
+ 
+       
+
+      <p>Testing: get all current Users, Blocks & ids...</p>
         
         <Display
-         users = { this.props.users }
          blocks = { this.props.blocks }
+         onEdit = { this.handleEditClicked }
          onDelete = { this.handleDeleteClicked }
+         users = { this.props.users }
         />  
 
 

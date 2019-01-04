@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dayz": "^2.2.0",
+    "fullcalendar": "^3.9.0",
+    "fullcalendar-reactwrapper": "^1.0.7",
     "moment": "^2.23.0",
+    "moment-range": "^4.0.1",
     "react": "^16.7.0",
     "react-datepicker": "^2.0.0",
     "react-dom": "^16.7.0",
