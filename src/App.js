@@ -142,7 +142,7 @@ handleEditClicked = (blockid) => {
   let editEndTime;
   let editBlockId;
   
-
+  //wht is proper way to do this?
   //for local state to show in selected fields
   const findObject = this.props.blocks.map((block) => {
     
