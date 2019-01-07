@@ -13,8 +13,8 @@ const initialState = {
   userId:'1234',
   users: [{
 
-    _id: 'test id',
-    name: 'test name'
+    _id: 'test _id',
+    name: 'test User'
  
   }],
   loading:false,

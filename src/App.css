@@ -39,10 +39,28 @@
 
 }
 
+.basic {
+  color: darkblue;
+  padding-top: 30px;
+  padding-left: 30px;
+
+}
+
 ul,li,.blocksList {
    
   color: grey;
   list-style: none;
+  font-size: 80%;
+
+
+}
+
+.adjustCalendar {
+
+  float: right;
+  padding-right: 30px;
+  width: 900px;
+  color: darkblue;
   font-size: 80%;
 
 

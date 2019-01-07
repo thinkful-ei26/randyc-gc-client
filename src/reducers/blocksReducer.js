@@ -15,14 +15,7 @@ import {
 
 const initialState = {
 
-  blocks: [{
-
-    _id: null,
-    userRef: null,
-    startDate: null,
-    endDate: null
-     
-  }],
+  blocks: [],
   loading: false,
   error: null
  
@@ -43,10 +36,12 @@ export function blocksReducer(state=initialState,action) {
   }
 
   if(action.type === FETCH_BLOCKS_SUCCESS){
- 
+   
+    //ref blocks: [...state.blocks,...action.data],
+
     return Object.assign({}, state, {
 
-      blocks: [...state.blocks,...action.data],
+      blocks: [...action.data],
       loading : false
 
 
@@ -81,7 +76,7 @@ export function blocksReducer(state=initialState,action) {
 
   if(action.type === POST_BLOCK_SUCCESS){
 
-    console.log('it worked!');
+     
 
     return Object.assign({}, state, {
 
@@ -118,7 +113,7 @@ export function blocksReducer(state=initialState,action) {
 
   if(action.type === PUT_BLOCK_SUCCESS){
 
-    console.log('the new block at the PUT_BLOCK_SUCCESS>>> ',action.block);
+    
 
     const newArr = state.blocks.map((block,index) => { 
       
@@ -136,7 +131,7 @@ export function blocksReducer(state=initialState,action) {
  
     });
 
-    console.log('the new array at PUT_BLOCK_SUCCESS>>> ',newArr);
+    
 
     return Object.assign({}, state, {
 

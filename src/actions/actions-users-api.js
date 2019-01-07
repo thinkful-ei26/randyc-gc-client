@@ -23,7 +23,7 @@ export const fetchUsersRequest = () => {
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const fetchUsersSuccess = (data) => {
 
-  console.log('>> data in fetchUsersSuccess >>',data);
+   
 
   return {
 

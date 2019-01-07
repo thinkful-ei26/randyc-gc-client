@@ -6,28 +6,27 @@ import { formatDate, formatTime } from '../utils/date';
 
 export default function Display(props) {
 
-  //console.log('props in Display... ',props);
-  
-  // const newDay = props.setDay;
 
-console.log('newDay ? ',props.setDay);
+//show users -- testing API
+const showUsersAndIds = props.users.map((user,index) => {
 
+  if(user.name){
 
-  //show users -- testing API
-  const showUsersAndIds = props.users.map((user,index) => {
-
-     
     return (
 
-      <li>
+      <li key={index}>
         Users: { user.name } ... Id: { user._id }
       </li>
  
     )
  
-  })
+  }
 
-  const showBlocksAndIds = props.blocks.map((block,index) => {
+  return '';
+
+})
+
+const showBlocksAndIds = props.blocks.map((block,index) => {
     
     
       if(block.userRef){
@@ -35,7 +34,7 @@ console.log('newDay ? ',props.setDay);
        
       return (
 
-        <li>
+        <li key={index}>
           user id: { block.userRef} <br/>
           block id: { block._id } <br/>
           start date: { formatDate(block.startDate)} <br/>
@@ -51,12 +50,13 @@ console.log('newDay ? ',props.setDay);
 
       }
 
+      return '';
       
   })
 
 
 
-  return (
+return (
   <div>
 
     
