@@ -9,19 +9,39 @@ import {
   PUT_BLOCK_REQUEST,
   PUT_BLOCK_SUCCESS,
   DELETE_BLOCK_REQUEST,
-  DELETE_BLOCK_SUCCESS
+  DELETE_BLOCK_SUCCESS,
+  SELECT_BLOCK
  
 } from '../actions/actions-blocks-api';
 
 const initialState = {
-
+ 
   blocks: [],
   loading: false,
-  error: null
+  error: null,
+  selectedBlock: null
  
 }
 
 export function blocksReducer(state=initialState,action) {
+
+  console.log('SELECT_BLOCK',action);
+
+  //const transfer = 
+
+  //SELECTED BLOCK FROM CALENDAR 
+  if(action.type === SELECT_BLOCK){
+
+    return Object.assign({}, state, {
+
+      selectedBlock : action.blockId
+
+    })
+
+  }
+
+
+
 
 
   //GET ALL BLOCKS
@@ -96,7 +116,6 @@ export function blocksReducer(state=initialState,action) {
 
     })
 
-
   }
 
   //PUT BLOCK by block id
@@ -108,12 +127,9 @@ export function blocksReducer(state=initialState,action) {
 
      })
  
-
   }
 
   if(action.type === PUT_BLOCK_SUCCESS){
-
-    
 
     const newArr = state.blocks.map((block,index) => { 
       
@@ -136,6 +152,7 @@ export function blocksReducer(state=initialState,action) {
     return Object.assign({}, state, {
 
       blocks: newArr,
+      selectedBlock: null,
       loading: true
  
     })

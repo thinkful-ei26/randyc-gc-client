@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import './App.css';
 //import Display from './components/display';
 import Dashboard from './components/dashboard';
+import ShowCalendar from './components/showcalendar';
 import LandingPage from './components/landing-page'; 
 //import Register from './components/register-page'
 

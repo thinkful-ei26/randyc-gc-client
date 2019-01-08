@@ -1,6 +1,19 @@
 import { API_BASE_URL } from '../config';
 
 //async actions to work with blocks API
+export const SELECT_BLOCK = 'SELECT_BLOCK';
+export const selectBlock = blockId => {
+
+  return{ 
+    
+    type: 'SELECT_BLOCK',
+    blockId
+  
+  };
+
+}
+
+
 
 //GET all blocks -- testing  ******
 export const FETCH_BLOCKS_REQUEST = 'FETCH_BLOCKS_REQUEST';
@@ -104,10 +117,10 @@ export const postBlockError = (error) => {
 export const PUT_BLOCK_REQUEST = 'PUT_BLOCK_REQUEST';
 export const putBlockRequest = (block) => (dispatch,getState) => {
  
-  console.log('put block request!', getState().usersReducer.userId);
+  //console.log('put block request!', getState().usersReducer.userId);
   block.userRef = getState().usersReducer.userId;
 
-  console.log('the put object!', block);
+  //console.log('the put object!', block);
  
   return fetch(`${API_BASE_URL}/blocks/put/${block._id}`, {
 
@@ -130,7 +143,7 @@ export const putBlockRequest = (block) => (dispatch,getState) => {
 export const PUT_BLOCK_SUCCESS = 'PUT_BLOCK_SUCCESS';
 export const putBlockSuccess = (block) => {
   
-  console.log('put block!>>> ', block);
+  //console.log('put block!>>> ', block);
 
   return {
 

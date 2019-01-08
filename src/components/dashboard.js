@@ -7,7 +7,7 @@ import 'fullcalendar/dist/fullcalendar.js';
 import 'fullcalendar/dist/fullcalendar.css';
 import goodcall from '../goodcall_image.png';
 
-import { ShowCalendar } from '../components/showcalendar'
+import ShowCalendar from '../components/showcalendar'
 
 import Display from '../components/display';
 import Navbar from '../components/navbar';
@@ -42,7 +42,8 @@ export class Dashboard extends React.Component {
 
     mode: 'ADD',
     modeMessage: 'Click below to ADD a new time block',
-    buttonLabel: 'SAVE',
+    buttonOneLabel: 'SAVE',
+    buttonTwoLabel: 'RESET',
     startDate : new Date(),
     endDate : new Date(),
     captureBlockId: null
@@ -52,13 +53,77 @@ export class Dashboard extends React.Component {
 
 }
 
-  componentDidMount(){
+//Initiate getting users & blocks from db
+componentDidMount(){
 
-    this.props.dispatch(fetchUsersRequest());
-    this.props.dispatch(fetchBlocksRequest());
+  this.props.dispatch(fetchUsersRequest());
+  this.props.dispatch(fetchBlocksRequest());
  
+}
+
+componentDidUpdate(prevProps){
+// componentWillUpdate(prevProps){
  
- }
+  const selectById = this.props.selectedBlock;
+
+  if(selectById === null && this.state.mode === 'EDIT'){
+
+    this.setState({
+ 
+      mode: 'ADD',
+      modeMessage: 'Click below to ADD a new time block',
+      buttonOneLabel: 'SAVE',
+      buttonTwoLabel: 'RESET',
+      startDate : null,
+      endDate : null,
+      captureBlockId: null
+    
+    })
+
+  }
+   
+  if(selectById !== null && this.state.mode === 'ADD'){
+ 
+    let justBlockId = selectById.selectedBlock;
+ 
+    let editStartTime;
+    let editEndTime;
+    let editBlockId;
+     
+    //what is proper way to do this?
+    //for local state to show in selected fields
+    const findObject = this.props.blocks.map((block) => {
+  
+    if(justBlockId === block._id){
+
+      editStartTime = block.startDate;
+      editEndTime = block.endDate;
+      editBlockId = block._id;
+
+    }
+   
+
+  });
+
+
+  this.setState({
+
+    mode: 'EDIT',
+    modeMessage: 'Click below to EDIT the selected time block',
+    buttonOneLabel: 'SAVE YOUR EDIT',
+    buttonTwoLabel: 'DELETE BLOCK',
+    startDate : editStartTime,
+    endDate : editEndTime,
+    captureBlockId: editBlockId
+
+  })
+
+  }
+  
+}
+
+
+
 
  //set start day & time
  handleStartSelect = day => {
@@ -107,7 +172,8 @@ handleSaveButton = () => {
  
       mode: 'ADD',
       modeMessage: 'Click below to ADD a new time block',
-      buttonLabel: 'SAVE',
+      buttonOneLabel: 'SAVE',
+      buttonTwoLabel: 'RESET',
       startDate : null,
       endDate : null,
       captureBlockId: null
@@ -152,7 +218,7 @@ handleEditClicked = (blockid) => {
   let editEndTime;
   let editBlockId;
   
-  //wht is proper way to do this?
+  //what is proper way to do this?
   //for local state to show in selected fields
   const findObject = this.props.blocks.map((block) => {
     
@@ -172,7 +238,8 @@ handleEditClicked = (blockid) => {
 
     mode: 'EDIT',
     modeMessage: 'Click below to EDIT the existing current time block',
-    buttonLabel: 'SAVE YOUR EDITED BLOCK',
+    buttonOneLabel: 'SAVE YOUR EDITED BLOCK',
+    buttonTwoLabel: 'DELETE BLOCK',
     startDate : editStartTime,
     endDate : editEndTime,
     captureBlockId: editBlockId
@@ -182,7 +249,7 @@ handleEditClicked = (blockid) => {
 
 }
 
-//DELETE BLOCK
+//DELETE or RESET BLOCK
 handleDeleteClicked = (blockid) => {
 
   console.log('delete this',blockid);
@@ -199,13 +266,13 @@ handleDeleteClicked = (blockid) => {
   
   render() {
 
-  //   //map the blocks stuff to new array....
 
-    let calendarEvents = [];
+  //map the blocks stuff to new array fro calendar events....
+  let calendarEvents = [];
 
-    console.log('blocks',this.props.blocks);
 
-    calendarEvents = this.props.blocks.map((block,index) => {
+  //Calendar events
+  calendarEvents = this.props.blocks.map((block,index) => {
 
       if(block.startDate){
 
@@ -220,7 +287,6 @@ handleDeleteClicked = (blockid) => {
 
       }
 
-
         return {
  
           title: 'Today!',
@@ -229,13 +295,12 @@ handleDeleteClicked = (blockid) => {
   
         }
 
- 
- 
-      
+    });
 
-  });
 
-  
+
+    console.log('state in App.js >>> ',this.state);
+
 
     return (
 
@@ -246,13 +311,8 @@ handleDeleteClicked = (blockid) => {
           <Navbar/>
 
           <div id= "calendar" className ='adjustCalendar' >
-            <ShowCalendar 
-            
-            rawEvents = {calendarEvents}	
-            >
-            </ShowCalendar>
+            <ShowCalendar startDate={this.state.startDate} rawEvents = {calendarEvents}/>
           </div>
-
 
           <br/>
           <img src={goodcall} alt='goodcall app'/> 
@@ -313,7 +373,9 @@ handleDeleteClicked = (blockid) => {
        />
          
        <hr />
-       <button onClick= { this.handleSaveButton }>{this.state.buttonLabel}</button>
+       <button onClick={ this.handleSaveButton }>{this.state.buttonOneLabel}</button>
+       &nbsp;&nbsp;&nbsp;&nbsp;
+       <button onClick={ this.handleDeleteClicked}>{this.state.buttonTwoLabel}</button>
           <br/>
           <br/>
         <hr/>
@@ -339,21 +401,19 @@ handleDeleteClicked = (blockid) => {
 
 }
  
-//export default App;
-
 const mapStateToProps = state => {
-
-  //console.log('state in App.js >>> ',state);
-
+ 
   return {
 
     users: state.usersReducer.users,
     blocks: state.blocksReducer.blocks,
-    userId: state.usersReducer.userId
- 
+    userId: state.usersReducer.userId,
+    selectedBlock: state.blocksReducer.selectedBlock,
+     
   }
  
 }
-
-
+ 
 export default connect(mapStateToProps)(Dashboard);
+
+ 

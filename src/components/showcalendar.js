@@ -6,40 +6,24 @@ import moment from 'moment';//for datePicker
 import 'fullcalendar/dist/fullcalendar.js';
 import 'fullcalendar/dist/fullcalendar.css';
 import FullCalendar from 'fullcalendar-reactwrapper';
+import { selectBlock } from '../actions/actions-blocks-api';
  
 export class ShowCalendar extends React.Component {
 
-  constructor(props) {
-
-    super(props);
-
-      this.state = {
-
-
-
-
-
-
-
-      }
-
-
-    }
-
-
-
+  
   //On click it puts the event info into the event form
   handleEventClick = event => {
-
-    console.log('start time:',event.start);
-    console.log('end time:',event.end);
-    console.log('id:',event._id);
-
-
-
-
-
-
+    
+    const transfer = {
+      
+      selectedBlock: event._id
+       
+    };
+ 
+    console.log('block id', transfer);
+     
+    this.props.dispatch(selectBlock(transfer));
+ 
  
   } 
 
@@ -56,14 +40,16 @@ export class ShowCalendar extends React.Component {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         }}
-        defaultDate={'2019-01-01'}
+        defaultDate={this.props.startDate}
         navLinks= {true} // can click day/week names to navigate views
         editable= {true}
         eventLimit= {true} // allow "more" link when too many events
         events = {this.props.rawEvents}
         eventClick = {(e) => {this.handleEventClick(e)}}
+         
       />
       	
+        
       </div>
  
     );
@@ -72,3 +58,18 @@ export class ShowCalendar extends React.Component {
   }
 
 }
+
+
+
+const mapStateToProps = state => {
+
+  return {
+
+    
+
+  }
+
+}
+
+
+export default connect(mapStateToProps)(ShowCalendar);
