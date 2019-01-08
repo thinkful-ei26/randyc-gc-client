@@ -5,11 +5,11 @@ export default function Navbar(props) {
 
   return(
 
-    <div>
+    <div className="navBar">
       <Link to="/dashboard"><button >MY SCHEDULE</button></Link>
-       
-      <button>COMPARE SCHEDULE</button>
-      
+      {/* &nbsp;&nbsp;&nbsp;&nbsp;
+      <button>COMPARE SCHEDULE</button> */}
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <Link to="/"><button>HOME</button></Link>
     </div>
   

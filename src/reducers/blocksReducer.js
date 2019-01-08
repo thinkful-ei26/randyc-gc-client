@@ -178,6 +178,7 @@ export function blocksReducer(state=initialState,action) {
 
       
       blocks: state.blocks.filter(block => block._id !== action.blockid),
+      selectedBlock: null,
       loading : true
 
  

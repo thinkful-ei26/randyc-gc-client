@@ -209,57 +209,45 @@ handleSaveButton = () => {
  
 }
 
-//EDIT BLOCK
-handleEditClicked = (blockid) => {
-
-  console.log('edit this',blockid);
-
-  let editStartTime;
-  let editEndTime;
-  let editBlockId;
-  
-  //what is proper way to do this?
-  //for local state to show in selected fields
-  const findObject = this.props.blocks.map((block) => {
-    
-    if(blockid === block._id){
  
-        editStartTime = block.startDate;
-        editEndTime = block.endDate;
-        editBlockId = block._id;
-         
-    }
-     
-
-  });
- 
-
-  this.setState({
-
-    mode: 'EDIT',
-    modeMessage: 'Click below to EDIT the existing current time block',
-    buttonOneLabel: 'SAVE YOUR EDITED BLOCK',
-    buttonTwoLabel: 'DELETE BLOCK',
-    startDate : editStartTime,
-    endDate : editEndTime,
-    captureBlockId: editBlockId
-
-  })
-
-
-}
 
 //DELETE or RESET BLOCK
-handleDeleteClicked = (blockid) => {
+handleDeleteClicked = () => {
 
-  console.log('delete this',blockid);
-  //need to get Block id...
+  //RESET
+  if(this.state.mode === 'ADD'){
 
-  if(window.confirm('Are you sure?')){
+    this.setState({
+ 
+      mode: 'ADD',
+      modeMessage: 'Click below to ADD a new time block',
+      buttonOneLabel: 'SAVE',
+      buttonTwoLabel: 'RESET',
+      startDate : null,
+      endDate : null,
+      captureBlockId: null
+    
+    })
 
-    this.props.dispatch(deleteBlockRequest(blockid));
 
   }
+
+  //DELETE
+  if(this.state.mode === 'EDIT'){
+
+    console.log('delete this',this.state.captureBlockId);
+    //need to get Block id...
+  
+    if(window.confirm('Are you sure?')){
+  
+      this.props.dispatch(deleteBlockRequest(this.state.captureBlockId));
+  
+    }
+
+
+  }
+
+ 
    
 }
 
@@ -306,10 +294,9 @@ handleDeleteClicked = (blockid) => {
 
       <div >
         
-        <div className = 'basic'>
-
-          <Navbar/>
-
+        <Navbar  />
+        <div className = "basic">
+ 
           <div id= "calendar" className ='adjustCalendar' >
             <ShowCalendar startDate={this.state.startDate} rawEvents = {calendarEvents}/>
           </div>
@@ -380,17 +367,15 @@ handleDeleteClicked = (blockid) => {
           <br/>
         <hr/>
         
-
        
-       
-      <p>Testing: get all current Users, Blocks & ids...</p>
+      {/* <p>Testing: get all current Users, Blocks & ids...</p>
         
         <Display
          blocks = { this.props.blocks }
          onEdit = { this.handleEditClicked }
          onDelete = { this.handleDeleteClicked }
          users = { this.props.users }
-        />  
+        />   */}
 
       </div>
 

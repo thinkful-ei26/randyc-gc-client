@@ -40,7 +40,7 @@ const showBlocksAndIds = props.blocks.map((block,index) => {
           start date: { formatDate(block.startDate)} <br/>
           end date: { formatDate(block.endDate)} <br/>
           block is from: {formatTime(block.startDate)} - {formatTime(block.endDate)} <br/>
-          <button onClick={() => {props.onEdit(block._id)}}>EDIT</button> ... <button onClick={() =>{props.onDelete(block._id)}} >DELETE</button>
+          {/* <button onClick={() => {props.onEdit(block._id)}}>EDIT</button> ... <button onClick={() =>{props.onDelete(block._id)}} >DELETE</button> */}
           <br/>...<br/>
         </li>
   
