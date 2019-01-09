@@ -1,71 +1,45 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
+import Input from './input';
+//import {login} from '../actions/actions-auth';
 
 export class LoginForm extends React.Component {
-
-  onSubmit(values) {
-
-    return this.props.dispatch(login)
-
-  }
+ 
 
   render() {
 
-    let error;
-    if(this.props.error) {
-
-      error = (
-
-        <div>
-
-          Error message! 
-
-        </div> 
-
-
-      )
-
-
-    }
-
+    let userName, password;
+ 
     return(
+ 
+        <form> 
+           <label htmlFor="username">Username: </label>
+            <input
+              ref={input => userName=input}
+              type='text'
+            ></input>
+            <br/>
+           <label htmlFor="password">Password: </label>
+            <input
+              ref={input => password=input}
+              type='text'
+            ></input>
+            <br/>
+            <br/>
+            <button 
+            onClick={(event) =>{
 
-      <form 
-        onSubmit={this.props.ahndleSubmit(values => this.onSubmit(values))}
-      >
-      { error }
-      <label htmlFor="username">User name</label>
-      <Field 
-        component={Input}
-        type="text"
-        name="username"
-        id="username"
-      />
-      <label htmlFor="password">Password</label>
-      <Field
-        component={Input}
-        type="password"
-        name="password"
-        id="password"
-      />
+              event.preventDefault();
 
-      <button disabled={this.props.pristine || this.props.submitting}>
-      Log In
-      </button>
+              //return this.props.dispatch(login(event.userName, event.password));
+
+            }
+ 
+            }>
+            LOG-IN</button>
+        </form>
         
-
-        
-      
-      >INPUT FORM
-
-
-
-
-
-      </form>
-
-
-    )
+    );
     
   }
 

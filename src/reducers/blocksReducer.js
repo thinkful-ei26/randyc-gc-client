@@ -25,10 +25,7 @@ const initialState = {
 
 export function blocksReducer(state=initialState,action) {
 
-  console.log('SELECT_BLOCK',action);
-
-  //const transfer = 
-
+  
   //SELECTED BLOCK FROM CALENDAR 
   if(action.type === SELECT_BLOCK){
 

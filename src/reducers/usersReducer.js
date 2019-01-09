@@ -2,32 +2,31 @@
 
 import {
 
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  FETCH_USERS_ERROR
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_ERROR,
+  POST_USER_REQUEST,
+  POST_USER_SUCCESS,
+  POST_USER_ERROR
  
 } from '../actions/actions-users-api';
 
 const initialState = {
 
-  userId:'1234',
-  users: [{
-
-    _id: 'test _id',
-    name: 'test User'
- 
-  }],
+  userName:null,
+  userId:null,
+  users: [],
   loading:false,
   error: null
  
 }
 
-//
-//export function usersReducer(state=initialState,action) {
+ 
 
 export function usersReducer(state=initialState,action){
 
-  if(action.type === FETCH_USERS_REQUEST){
+  //GET ALL 
+  if(action.type === FETCH_USER_REQUEST){
 
     return Object.assign({}, state, {
 
@@ -37,12 +36,13 @@ export function usersReducer(state=initialState,action){
 
   }
 
-  if(action.type === FETCH_USERS_SUCCESS){
- 
-
+  if(action.type === FETCH_USER_SUCCESS){
+   
     return Object.assign({}, state, {
 
-      users: [...state.users, ...action.data],
+      userName: action.data.firstName,
+      userId: action.data._id,
+      users: [action.data],
       loading : false
 
     })
@@ -50,7 +50,7 @@ export function usersReducer(state=initialState,action){
 
   }
 
-  if(action.type === FETCH_USERS_ERROR){
+  if(action.type === FETCH_USER_ERROR){
 
     return Object.assign({}, state, {
 
@@ -62,6 +62,47 @@ export function usersReducer(state=initialState,action){
 
   }
 
+   
+  //POST USER 
+  if(action.type === POST_USER_REQUEST) {
+
+    return Object.assign({}, state, {
+
+      loading: true
+
+
+    })
+
+
+
+
+  }
+
+  if(action.type === POST_USER_SUCCESS) {
+ 
+    return Object.assign({}, state, {
+
+      userId: action.data.firstName,  
+      users: [...state.users, action.data],
+      loading: false
+
+
+    })
+
+
+  }
+
+  if(action.type === POST_USER_ERROR) {
+
+    Object.assign({}, state, {
+
+      loading: false,
+      error: action.error
+
+
+    })
+
+  }
 
 //Default return state
 return state;

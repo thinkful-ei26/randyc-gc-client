@@ -10,12 +10,12 @@ export default function Display(props) {
 //show users -- testing API
 const showUsersAndIds = props.users.map((user,index) => {
 
-  if(user.name){
+  if(user.firstName){
 
     return (
 
       <li key={index}>
-        Users: { user.name } ... Id: { user._id }
+        Users: { user.firstName } ... Id: { user._id }
       </li>
  
     )

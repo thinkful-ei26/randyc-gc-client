@@ -9,25 +9,26 @@ import goodcall from '../goodcall_image.png';
 
 import ShowCalendar from '../components/showcalendar'
 
-import Display from '../components/display';
 import Navbar from '../components/navbar';
  
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import Display from './display';
+
 //Actions
-import { fetchUsersRequest } from '../actions/actions-users-api';
+import { fetchUserRequest } from '../actions/actions-users-api';
 import
  { fetchBlocksRequest,postBlockRequest,putBlockRequest,deleteBlockRequest } from '../actions/actions-blocks-api';
-import { setStartDay, setEndDay } from '../actions/actions-input';
+
 import { formatDate, formatTime, formatFullCalendar } from '../utils/date';
 
 
 
 //date stuff
-let date = null;
+// let date = null;
 
-const formatMonthDay = date => moment(date).format("MMMM Do YYYY");
+// const formatMonthDay = date => moment(date).format("MMMM Do YYYY");
  
 //const formatTime = date => moment(date).format("HH:mm a");
 
@@ -56,7 +57,7 @@ export class Dashboard extends React.Component {
 //Initiate getting users & blocks from db
 componentDidMount(){
 
-  this.props.dispatch(fetchUsersRequest());
+  this.props.dispatch(fetchUserRequest());
   this.props.dispatch(fetchBlocksRequest());
  
 }
@@ -267,7 +268,7 @@ handleDeleteClicked = () => {
         return {
 
           _id: block._id,
-          title: 'Event',
+          title: 'Good Time',
           start: formatFullCalendar(block.startDate),
           end: formatFullCalendar(block.endDate)
   
@@ -287,7 +288,7 @@ handleDeleteClicked = () => {
 
 
 
-    console.log('state in App.js >>> ',this.state);
+    console.log('user in dashboard? >>> ',this.props.userId);
 
 
     return (
@@ -305,7 +306,7 @@ handleDeleteClicked = () => {
           <img src={goodcall} alt='goodcall app'/> 
           <h3> { this.state.modeMessage } </h3>
           
-          The current user id is: {this.props.userId }<br/>
+          The current user: {this.props.userName}<br/>
           The selected day is { formatDate(this.state.startDate)}<br/>
           The start time is: {formatTime(this.state.startDate)}<br/>
           The end time is: {formatTime(this.state.endDate)}
@@ -368,14 +369,14 @@ handleDeleteClicked = () => {
         <hr/>
         
        
-      {/* <p>Testing: get all current Users, Blocks & ids...</p>
+      <p>Testing: get all current Users, Blocks & ids...</p>
         
         <Display
          blocks = { this.props.blocks }
          onEdit = { this.handleEditClicked }
          onDelete = { this.handleDeleteClicked }
          users = { this.props.users }
-        />   */}
+        />  
 
       </div>
 
@@ -393,6 +394,7 @@ const mapStateToProps = state => {
     users: state.usersReducer.users,
     blocks: state.blocksReducer.blocks,
     userId: state.usersReducer.userId,
+    userName: state.usersReducer.userName,
     selectedBlock: state.blocksReducer.selectedBlock,
      
   }

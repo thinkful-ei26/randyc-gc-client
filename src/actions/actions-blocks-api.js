@@ -64,8 +64,6 @@ export const fetchBlocksError = (error) => {
 //POST a block ******
 export const POST_BLOCK_REQUEST = 'POST_BLOCK_REQUEST';
 export const postBlockRequest = (obj) => (dispatch,getState) => {
-
-  console.log('post block request!', getState().usersReducer.userId);
  
   obj.userRef = getState().usersReducer.userId;
 
@@ -88,9 +86,7 @@ return fetch(`${API_BASE_URL}/blocks/post`, {
   
 export const POST_BLOCK_SUCCESS = 'POST_BLOCK_SUCCESS';
 export const postBlockSuccess = (data) => {
-
-  console.log('post block!');
-
+ 
   return {
 
     type: 'POST_BLOCK_SUCCESS',
