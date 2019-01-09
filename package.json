@@ -7,6 +7,7 @@
     "enzyme": "^3.8.0",
     "fullcalendar": "^3.9.0",
     "fullcalendar-reactwrapper": "^1.0.7",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.23.0",
     "moment-range": "^4.0.1",
     "react": "^16.7.0",

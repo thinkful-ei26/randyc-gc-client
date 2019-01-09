@@ -1,53 +1,76 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
-//import {login} from '../actions/actions-auth';
-
+import {login} from '../actions/auth';
+import {required, nonEmpty} from '../validators';
+ 
 export class LoginForm extends React.Component {
+    onSubmit(values) {
+
+      console.log('onsubmit: ',values);
+
+        return this.props.dispatch(login(values.username, values.password));
+    }
+
+    render() {
  
+        let error;
+        if (this.props.error) {
+            error = (
+                <div className="form-error" aria-live="polite">
+                    {this.props.error}
+                </div>
+            );
 
-  render() {
 
-    let userName, password;
- 
-    return(
- 
-        <form> 
-           <label htmlFor="username">Username: </label>
-            <input
-              ref={input => userName=input}
-              type='text'
-            ></input>
-            <br/>
-           <label htmlFor="password">Password: </label>
-            <input
-              ref={input => password=input}
-              type='text'
-            ></input>
-            <br/>
-            <br/>
-            <button 
-            onClick={(event) =>{
+        }
 
-              event.preventDefault();
-
-              //return this.props.dispatch(login(event.userName, event.password));
-
-            }
- 
-            }>
-            LOG-IN</button>
-        </form>
+        console.log('this.props:', this.props);
         
-    );
-    
-  }
+        return (
+
+
+            <form
+                className="centerStuff"
+                onSubmit={this.props.handleSubmit((values) => {
+
+                    console.log('values',values);
+                    this.onSubmit(values);
+
+                }
+
+                   
+                )}>
+                {error}
+                <label htmlFor="username">Username</label>
+                <Field
+                    component={Input}
+                    type="text"
+                    name="username"
+                    id="username"
+                    validate={[required, nonEmpty]}
+                />
+                <label htmlFor="password">Password</label>
+                <Field
+                    component={Input}
+                    type="password"
+                    name="password"
+                    id="password"
+                    validate={[required, nonEmpty]}
+                />
+                <br/>
+                <button disabled={this.props.pristine || this.props.submitting}>
+                    LOG IN
+                </button>
+            </form>
+        );
+    }
+
 
 
 }
 
 export default reduxForm({
-
-  form: 'login' 
-
+    form: 'login',
+    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
 })(LoginForm);

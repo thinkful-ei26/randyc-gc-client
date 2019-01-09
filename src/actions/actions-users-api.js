@@ -6,11 +6,20 @@ import { API_BASE_URL } from '../config';
 //GET ONE USER BY ID
 export const FETCH_USER_REQUEST = 'FETCH_USERS_REQUEST';
 export const fetchUserRequest = () => {
+ 
+  return(dispatch,getState) => {
 
-  let test_id = '5c35b7b610c89e8339cffdc5';
+    let id = getState().auth.currentUser.id;
 
-  return(dispatch) => {
-    fetch(`${API_BASE_URL}/users/getUser/${test_id}`)
+    if(id === null){
+
+      id = 'PROBLEM';
+
+    }
+
+    console.log(getState().auth.currentUser.id);
+
+    fetch(`${API_BASE_URL}/users/getUser/${id}`)
     .then((response) => {
       
       //console.log('this is it >>> ',response.json());

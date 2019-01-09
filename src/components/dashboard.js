@@ -306,7 +306,7 @@ handleDeleteClicked = () => {
           <img src={goodcall} alt='goodcall app'/> 
           <h3> { this.state.modeMessage } </h3>
           
-          The current user: {this.props.userName}<br/>
+          The current user: {this.props.username}<br/>
           The selected day is { formatDate(this.state.startDate)}<br/>
           The start time is: {formatTime(this.state.startDate)}<br/>
           The end time is: {formatTime(this.state.endDate)}
@@ -394,7 +394,7 @@ const mapStateToProps = state => {
     users: state.usersReducer.users,
     blocks: state.blocksReducer.blocks,
     userId: state.usersReducer.userId,
-    userName: state.usersReducer.userName,
+    username: state.usersReducer.username,
     selectedBlock: state.blocksReducer.selectedBlock,
      
   }

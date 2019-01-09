@@ -13,7 +13,7 @@ import {
 
 const initialState = {
 
-  userName:null,
+  username:null,
   userId:null,
   users: [],
   loading:false,
@@ -40,7 +40,7 @@ export function usersReducer(state=initialState,action){
    
     return Object.assign({}, state, {
 
-      userName: action.data.firstName,
+      username: action.data.username,
       userId: action.data._id,
       users: [action.data],
       loading : false
@@ -82,7 +82,8 @@ export function usersReducer(state=initialState,action){
  
     return Object.assign({}, state, {
 
-      userId: action.data.firstName,  
+      username: action.data.username,
+      userId: action.data._id,  
       users: [...state.users, action.data],
       loading: false
 

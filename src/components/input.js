@@ -1,16 +1,17 @@
 import React from 'react';
 
 export default class Input extends React.Component {
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.meta.active && this.props.meta.active) {
-        this.input.focus();
+    componentDidUpdate(prevProps) {
+        if (!prevProps.meta.active && this.props.meta.active) {
+            this.input.focus();
+        }
     }
-}
 
-  render() {
+    render() {
 
-    let error;
+        
+
+        let error;
         if (this.props.meta.touched && this.props.meta.error) {
             error = <div className="form-error">{this.props.meta.error}</div>;
         }
@@ -22,25 +23,20 @@ export default class Input extends React.Component {
             );
         }
 
-
-
-    return (
-
-      <div className="centerStuff">
-
-        <label htmlFor="label?">input here</label>
-        <input
-         {...this.props.input}
-         id={this.props.input.name}
-         type={this.props.type}
-         ref={input => (this.input = input)}
-         >input</input>
-
-      </div>
-
-    );
-
-  }
-
+        return (
+            <div className="form-input">
+                <label htmlFor={this.props.input.name}>
+                    {this.props.label}
+                    {error}
+                    {warning}
+                </label>
+                <input
+                    {...this.props.input}
+                    id={this.props.input.name}
+                    type={this.props.type}
+                    ref={input => (this.input = input)}
+                />
+            </div>
+        );
+    }
 }
-
