@@ -13,7 +13,7 @@ export function RegistrationPage(props) {
         return <Redirect to="/dashboard" />;
     }
     return (
-        <div className="basic">
+        <div className="centerStuff">
         <img src={goodcall} alt='goodcall app'/> 
             <h2>Register for Good Call</h2>
             <RegistrationForm />

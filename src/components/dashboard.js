@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import moment from 'moment';//for datePicker
- 
 import 'fullcalendar/dist/fullcalendar.js';
 import 'fullcalendar/dist/fullcalendar.css';
 import goodcall from '../goodcall_image.png';
@@ -10,27 +8,20 @@ import goodcall from '../goodcall_image.png';
 import ShowCalendar from '../components/showcalendar'
 
 import Navbar from '../components/navbar';
+import HeaderBar from '../components/header-bar';
  
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import Display from './display';
-
 //Actions
-import { fetchUserRequest } from '../actions/actions-users-api';
+// import { fetchProtectedData } from '../actions/protected-data';
+// import { fetchUserRequest } from '../actions/actions-users-api';
+
 import
  { fetchBlocksRequest,postBlockRequest,putBlockRequest,deleteBlockRequest } from '../actions/actions-blocks-api';
 
 import { formatDate, formatTime, formatFullCalendar } from '../utils/date';
-
-
-
-//date stuff
-// let date = null;
-
-// const formatMonthDay = date => moment(date).format("MMMM Do YYYY");
- 
-//const formatTime = date => moment(date).format("HH:mm a");
+  
 
 export class Dashboard extends React.Component {
 
@@ -47,8 +38,9 @@ export class Dashboard extends React.Component {
     buttonTwoLabel: 'RESET',
     startDate : new Date(),
     endDate : new Date(),
-    captureBlockId: null
-     
+    captureBlockId: null,
+    calendarEvents: []
+      
 
   }
 
@@ -57,18 +49,15 @@ export class Dashboard extends React.Component {
 //Initiate getting users & blocks from db
 componentDidMount(){
 
-  this.props.dispatch(fetchUserRequest());
   this.props.dispatch(fetchBlocksRequest());
  
 }
 
 componentDidUpdate(prevProps){
-// componentWillUpdate(prevProps){
+  
+const selectById = this.props.selectedBlock;
+if(selectById === null && this.state.mode === 'EDIT'){
  
-  const selectById = this.props.selectedBlock;
-
-  if(selectById === null && this.state.mode === 'EDIT'){
-
     this.setState({
  
       mode: 'ADD',
@@ -81,9 +70,9 @@ componentDidUpdate(prevProps){
     
     })
 
-  }
+}
    
-  if(selectById !== null && this.state.mode === 'ADD'){
+if(selectById !== null && this.state.mode === 'ADD'){
  
     let justBlockId = selectById.selectedBlock;
  
@@ -103,33 +92,31 @@ componentDidUpdate(prevProps){
 
     }
    
+    });
+ 
 
-  });
+    this.setState({
 
-
-  this.setState({
-
-    mode: 'EDIT',
-    modeMessage: 'Click below to EDIT the selected time block',
-    buttonOneLabel: 'SAVE YOUR EDIT',
-    buttonTwoLabel: 'DELETE BLOCK',
-    startDate : editStartTime,
-    endDate : editEndTime,
-    captureBlockId: editBlockId
-
-  })
+      mode: 'EDIT',
+      modeMessage: 'Click below to EDIT the selected time block',
+      buttonOneLabel: 'SAVE YOUR EDIT',
+      buttonTwoLabel: 'DELETE BLOCK',
+      startDate : editStartTime,
+      endDate : editEndTime,
+      captureBlockId: editBlockId 
+     
+    })
 
   }
+ 
   
 }
 
 
 
-
  //set start day & time
  handleStartSelect = day => {
- 
-     
+   
   this.setState({
 
     startDate: day,
@@ -166,8 +153,7 @@ handleEndSelect = day => {
 
 //SAVE BLOCK as new or after EDIT
 handleSaveButton = () => {
-
-  //console.log('state',this.state);
+ 
 
   this.setState({
  
@@ -177,9 +163,9 @@ handleSaveButton = () => {
       buttonTwoLabel: 'RESET',
       startDate : null,
       endDate : null,
-      captureBlockId: null
-    
+      captureBlockId: null 
   })
+
 
   if(this.state.mode === 'ADD'){
 
@@ -192,8 +178,7 @@ handleSaveButton = () => {
 
  
   }
-
-
+ 
   if(this.state.mode === 'EDIT'){
 
     this.props.dispatch(putBlockRequest({
@@ -205,9 +190,7 @@ handleSaveButton = () => {
     }));
  
   }
-
   
- 
 }
 
  
@@ -233,80 +216,56 @@ handleDeleteClicked = () => {
 
   }
 
-  //DELETE
+  //DELETE BLOCK
   if(this.state.mode === 'EDIT'){
 
-    console.log('delete this',this.state.captureBlockId);
-    //need to get Block id...
-  
     if(window.confirm('Are you sure?')){
   
       this.props.dispatch(deleteBlockRequest(this.state.captureBlockId));
   
     }
 
-
   }
-
  
    
 }
 
   
-  render() {
+render() {
 
+    //map the blocks stuff to new array for calendar events....
+    let transformedEvents = [];
+ 
+    //Calendar events
+    transformedEvents = this.props.blocks.map((block,index) => {
 
-  //map the blocks stuff to new array fro calendar events....
-  let calendarEvents = [];
+      return {
 
-
-  //Calendar events
-  calendarEvents = this.props.blocks.map((block,index) => {
-
-      if(block.startDate){
-
-        return {
-
-          _id: block._id,
-          title: 'Good Time',
-          start: formatFullCalendar(block.startDate),
-          end: formatFullCalendar(block.endDate)
-  
-        }
+        _id: block._id,
+        title: 'Good Time',
+        start: formatFullCalendar(block.startDate),
+        end: formatFullCalendar(block.endDate)
 
       }
 
-        return {
- 
-          title: 'Today!',
-          start: formatFullCalendar(new Date()),
-          end: formatFullCalendar(new Date())
-  
-        }
-
     });
 
-
-
-    console.log('user in dashboard? >>> ',this.props.userId);
-
-
-    return (
-
-      <div >
-        
-        <Navbar  />
-        <div className = "basic">
+     
  
+    return (
+ 
+        <div className = "basic">
+
+          <HeaderBar />
           <div id= "calendar" className ='adjustCalendar' >
-            <ShowCalendar startDate={this.state.startDate} rawEvents = {calendarEvents}/>
+            <ShowCalendar startDate={this.state.startDate} rawEvents = {transformedEvents}/>
           </div>
 
           <br/>
           <img src={goodcall} alt='goodcall app'/> 
           <h3> { this.state.modeMessage } </h3>
           
-          The current user: {this.props.username}<br/>
+          The current user: {this.props.usernameAuth}<br/>
           The selected day is { formatDate(this.state.startDate)}<br/>
           The start time is: {formatTime(this.state.startDate)}<br/>
           The end time is: {formatTime(this.state.endDate)}
@@ -340,8 +299,6 @@ handleDeleteClicked = () => {
  
         />
 
-        
-
        <hr />
         
        Select End time for block:
@@ -360,27 +317,15 @@ handleDeleteClicked = () => {
           
        />
          
-       <hr />
+       <hr/>
+       <br/>
        <button onClick={ this.handleSaveButton }>{this.state.buttonOneLabel}</button>
        &nbsp;&nbsp;&nbsp;&nbsp;
-       <button onClick={ this.handleDeleteClicked}>{this.state.buttonTwoLabel}</button>
-          <br/>
-          <br/>
-        <hr/>
-        
-       
-      <p>Testing: get all current Users, Blocks & ids...</p>
-        
-        <Display
-         blocks = { this.props.blocks }
-         onEdit = { this.handleEditClicked }
-         onDelete = { this.handleDeleteClicked }
-         users = { this.props.users }
-        />  
-
-      </div>
-
-    </div> 
+       <button onClick={ this.handleDeleteClicked }>{this.state.buttonTwoLabel}</button>
+       <br/>
+       <br/>
+       <hr/>
+       </div>
 
     );
   }
@@ -396,6 +341,7 @@ const mapStateToProps = state => {
     userId: state.usersReducer.userId,
     username: state.usersReducer.username,
     selectedBlock: state.blocksReducer.selectedBlock,
+    usernameAuth: state.auth.currentUser.username
      
   }
  

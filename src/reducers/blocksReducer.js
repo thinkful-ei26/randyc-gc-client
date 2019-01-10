@@ -54,11 +54,10 @@ export function blocksReducer(state=initialState,action) {
 
   if(action.type === FETCH_BLOCKS_SUCCESS){
    
-    //ref blocks: [...state.blocks,...action.data],
 
     return Object.assign({}, state, {
 
-      blocks: [...action.data],
+      blocks: action.data,
       loading : false
 
 
@@ -94,6 +93,7 @@ export function blocksReducer(state=initialState,action) {
   if(action.type === POST_BLOCK_SUCCESS){
 
      
+    console.log('action.data',action.data);
 
     return Object.assign({}, state, {
 

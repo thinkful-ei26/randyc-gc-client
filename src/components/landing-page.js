@@ -18,7 +18,6 @@ export function LandingPage(props) {
             <h2>Welcome to GoodCall!</h2>
             <LoginForm />
             <br/>
-
             <Link to="/register"><button>NEW USER REGISTER HERE</button></Link>
         </div>
     );

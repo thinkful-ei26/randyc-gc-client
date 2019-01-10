@@ -11,13 +11,7 @@ export const fetchUserRequest = () => {
 
     let id = getState().auth.currentUser.id;
 
-    if(id === null){
-
-      id = 'PROBLEM';
-
-    }
-
-    console.log(getState().auth.currentUser.id);
+    //console.log(getState().auth.currentUser.id);
 
     fetch(`${API_BASE_URL}/users/getUser/${id}`)
     .then((response) => {
@@ -66,7 +60,7 @@ export const fetchUserError = (error) => {
 export const POST_USER_REQUEST ='POST_USER_REQUEST';
 export const postUserRequest = (userInfo) => (dispatch,getState) => {
 
-  return fetch(`${API_BASE_URL}/users/post`, {
+  return fetch(`${API_BASE_URL}/api/users/post`, {
 
     method: 'POST',
     body: JSON.stringify(userInfo),

@@ -13,14 +13,23 @@ export const selectBlock = blockId => {
 
 }
 
-
-
-//GET all blocks -- testing  ******
+//GET all blocks from the current authorized User
 export const FETCH_BLOCKS_REQUEST = 'FETCH_BLOCKS_REQUEST';
 export const fetchBlocksRequest = () => {
+  
+  return(dispatch,getState) => {
 
-  return(dispatch) => {
-    fetch(`${API_BASE_URL}/blocks/get`)
+    const authToken = getState().auth.authToken;
+    fetch(`${API_BASE_URL}/api/users/blocks/`,{
+
+        method: 'GET',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`
+        }
+
+
+    })
       .then((response)=>{
 
         return response.json();
@@ -65,14 +74,19 @@ export const fetchBlocksError = (error) => {
 export const POST_BLOCK_REQUEST = 'POST_BLOCK_REQUEST';
 export const postBlockRequest = (obj) => (dispatch,getState) => {
  
-  obj.userRef = getState().usersReducer.userId;
+  // obj.userRef = getState().usersReducer.userId;
 
-return fetch(`${API_BASE_URL}/blocks/post`, {
+  obj.userRef = getState().auth.currentUser.id;//set user id on a block as userRef
+
+const authToken = getState().auth.authToken;
+return fetch(`${API_BASE_URL}/api/users/blocks/post`, {
 
     method: 'POST',
     body: JSON.stringify(obj),
     headers: {
 
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`,
       'content-type' : 'application/json'
 
     }
@@ -117,13 +131,16 @@ export const putBlockRequest = (block) => (dispatch,getState) => {
   block.userRef = getState().usersReducer.userId;
 
   //console.log('the put object!', block);
- 
-  return fetch(`${API_BASE_URL}/blocks/put/${block._id}`, {
+  
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/api/users/blocks/put/${block._id}`, {
 
     method: 'PUT',
     body: JSON.stringify(block),
     headers: {
 
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`,
       'content-type' : 'application/json'
 
     }
@@ -153,13 +170,16 @@ export const putBlockSuccess = (block) => {
 
 //DELETE a block 
 export const DELETE_BLOCK_REQUEST = 'DELETE_BLOCK_REQUEST';
-export const deleteBlockRequest = (blockid) => (dispatch) => {
+export const deleteBlockRequest = (blockid) => (dispatch, getState) => {
 
+  const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/blocks/delete/${blockid}`, {
 
     method: 'DELETE',
     headers: {
 
+       // Provide our auth token as credentials
+       Authorization: `Bearer ${authToken}`,
       'content-type' : 'application/json'
 
     }

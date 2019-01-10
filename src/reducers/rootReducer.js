@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 import { usersReducer } from './usersReducer';
 import { blocksReducer } from './blocksReducer';
 import auth from './auth';

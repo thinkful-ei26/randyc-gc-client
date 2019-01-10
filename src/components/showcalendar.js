@@ -29,7 +29,6 @@ export class ShowCalendar extends React.Component {
 
   render() {
     
-
     return(
 
       <div id="calendar-component">

@@ -7,24 +7,24 @@ import { formatDate, formatTime } from '../utils/date';
 export default function Display(props) {
 
 
-//show users -- testing API
-const showUsersAndIds = props.users.map((user,index) => {
+// //show users -- testing API
+// const showUsersAndIds = props.users.map((user,index) => {
 
-  if(user.firstName){
+//   if(user.firstName){
 
-    return (
+//     return (
 
-      <li key={index}>
-        Users: { user.firstName } ... Id: { user._id }
-      </li>
+//       <li key={index}>
+//         Users: { user.firstName } ... Id: { user._id }
+//       </li>
  
-    )
+//     )
  
-  }
+//   }
 
-  return '';
+//   return '';
 
-})
+// })
 
 const showBlocksAndIds = props.blocks.map((block,index) => {
     
@@ -35,7 +35,7 @@ const showBlocksAndIds = props.blocks.map((block,index) => {
       return (
 
         <li key={index}>
-          user id: { block.userRef} <br/>
+          {/* user id: { block.userRef} <br/> */}
           block id: { block._id } <br/>
           start date: { formatDate(block.startDate)} <br/>
           end date: { formatDate(block.endDate)} <br/>
@@ -67,9 +67,9 @@ return (
     </ul>
 
     
-    <ul className = 'blocksList'>Users:
+    {/* <ul className = 'blocksList'>Users:
      { showUsersAndIds }
-    </ul>
+    </ul> */}
     
   </div>
 
