@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import moment from 'moment';//for datePicker
-
 import 'fullcalendar/dist/fullcalendar.js';
 import 'fullcalendar/dist/fullcalendar.css';
 import FullCalendar from 'fullcalendar-reactwrapper';
@@ -20,10 +18,7 @@ export class ShowCalendar extends React.Component {
        
     };
  
-    console.log('block id', transfer);
-     
     this.props.dispatch(selectBlock(transfer));
- 
  
   } 
 

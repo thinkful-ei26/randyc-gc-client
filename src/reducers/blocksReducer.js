@@ -92,9 +92,6 @@ export function blocksReducer(state=initialState,action) {
 
   if(action.type === POST_BLOCK_SUCCESS){
 
-     
-    console.log('action.data',action.data);
-
     return Object.assign({}, state, {
 
       blocks: [...state.blocks,action.data],
