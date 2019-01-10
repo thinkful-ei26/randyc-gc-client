@@ -3,10 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {clearAuth} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
-
-import goodcall from '../goodcall_image.png';
-
-
+  
 export class HeaderBar extends React.Component {
     logOut() {
         this.props.dispatch(clearAuth());
