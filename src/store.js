@@ -33,8 +33,6 @@ const store = createStore(
 const authToken = loadAuthToken();
 if (authToken) {
 
-  console.log(authToken);
-
     const token = authToken;
     store.dispatch(setAuthToken(token));
     store.dispatch(refreshAuthToken());
