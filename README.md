@@ -3,7 +3,8 @@ In the dark and distant past when landlines were the norm, the appropriate time 
 
 See the deployed version here: https://goodcall.herokuapp.com/
 
-Server repo is lives here: https://github.com/thinkful-ei26/randyc-gc-server
+Client repo lives here: https://github.com/thinkful-ei26/randyc-gc-client
+Server repo lives here: https://github.com/thinkful-ei26/randyc-gc-server
 
 ## Base Project Goal
 GoodCall is intended to help a user keep track of the good times to call people.
@@ -45,12 +46,37 @@ Frontend: React
 State Management: Redux
 Server: Node with Express
 Database: MongoDB
+Authentication: JWT
 Main Calendar UI: FullCalendar
 Time Selection UI: ReactJS Datepicker
  
 ## Code Base Structure:
-
-
+/src
+/actions
+  action-blocks-api
+  action-users-api
+  auth.js
+  users.js
+  utils.js
+/components
+  dashboard.js
+  header-bar.js
+  input.js
+  landing-page.js
+  login-form.js
+  registration-form.js
+  registration-page.js
+  requires-login.js
+  showcalendar.js
+/reducers
+  auth.js
+  blocksReducer.js
+  usersReducer.js
+  rootReducer.js
+  
+  
+  
+ 
 
 
 
