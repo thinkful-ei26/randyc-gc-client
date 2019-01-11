@@ -51,14 +51,14 @@ Main Calendar UI: FullCalendar
 Time Selection UI: ReactJS Datepicker
  
 ## Code Base Structure:
-/src
+## /src
 /actions
   action-blocks-api
   action-users-api
   auth.js
   users.js
   utils.js
-/components
+## /components
   dashboard.js
   header-bar.js
   input.js
@@ -68,7 +68,7 @@ Time Selection UI: ReactJS Datepicker
   registration-page.js
   requires-login.js
   showcalendar.js
-/reducers
+## /reducers
   auth.js
   blocksReducer.js
   usersReducer.js
