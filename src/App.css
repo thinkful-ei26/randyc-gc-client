@@ -59,12 +59,12 @@ ul,li,.blocksList {
 .adjustCalendar {
 
   float: right;
+  padding-top: 15px;
   padding-right: 30px;
   width: 900px;
   color: darkblue;
   font-size: 80%;
-
-
+   
 }
 
 .navBar {
@@ -74,3 +74,44 @@ ul,li,.blocksList {
 
 
 }
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  .adjustCalendar {
+    text-align: center;
+    width: 370px;
+  }
+  
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  
+  .adjustCalendar {
+    text-align: center;
+    width: 570px;
+  }
+  
+}
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  .adjustCalendar {
+    text-align: center;
+    width: 370px;
+  }
+  
+}
+  
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .adjustCalendar {
+    text-align: center;
+    width: 270px;
+  }
+  
+}
+
+ 

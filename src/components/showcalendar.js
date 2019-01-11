@@ -34,12 +34,25 @@ export class ShowCalendar extends React.Component {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         }}
+        themeSystem= 'bootstrap4'
         defaultDate={this.props.startDate}
         navLinks= {true} // can click day/week names to navigate views
         editable= {false}
         eventLimit= {true} // allow "more" link when too many events
         events = {this.props.rawEvents}
         eventClick = {(e) => {this.handleEventClick(e)}}
+        // width= {60}
+        // height= {100}
+        size= {50} 
+        // eventAfterAllRender = {
+
+        //   function(view){
+        //     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        //        FullCalendar('changeView', 'agendaDay');
+        //     }
+        //   }
+
+        // }
          
       />
       	
