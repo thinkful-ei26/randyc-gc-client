@@ -17,6 +17,7 @@ export function LandingPage(props) {
             <img src={goodcall} alt='goodcall app'/> 
             <h2>Welcome to GoodCall!</h2>
             <p>GoodCall provides a simple way to schedule blocks of time for phone calls.</p>
+            <p>Create an account by clicking the button below or LOG IN to get started!</p>
             <LoginForm />
             <br/>
             <Link to="/register"><button>NEW USER REGISTER HERE</button></Link>
