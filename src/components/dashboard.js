@@ -6,7 +6,7 @@ import 'fullcalendar/dist/fullcalendar.css';
 import goodcall from '../goodcall_image.png';
 
 import ShowCalendar from '../components/showcalendar';
-import Display from '../components/display';
+
 import Navbar from '../components/navbar';
 import HeaderBar from '../components/header-bar';
  
