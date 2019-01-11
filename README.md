@@ -20,12 +20,12 @@ Exisitng time blocks can then be freely edited and deleted.
 These blocks are stored in your secure user account via a persistant Mongo database.
 
 ## Future Functionality Goals:
->> Allow users to add themselves to a user group where-in they can share schedule information.
+* Allow users to add themselves to a user group where-in they can share schedule information.
 This would allow viewable comparisons/filters of a user schedule with that of his or her entire user group or selected users of that group.
 
->> Drag and drop functionality of calendar UI as well as stretching blocks to set start and end times.
+* Drag and drop functionality of calendar UI as well as stretching blocks to set start and end times.
 
->> Intelligent suggestion alerts to a user, ie: It's Saturday, during your 1:30pm - 2:30pm time block it's a good time to call: Bill, Janet or Dave.
+* Intelligent suggestion alerts to a user, ie: It's Saturday, during your 1:30pm - 2:30pm time block it's a good time to call: Bill, Janet or Dave.
  
 ## Screenshots:
 
