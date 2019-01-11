@@ -4,7 +4,7 @@ In the dark and distant past when landlines were the norm, the appropriate time 
 
 GoodCall is intended to help a user keep track of the good times to call people.
 
-#Current Functionality:
+# Current Functionality:
 As a user you can curently set time block events with a day/date and a start and end time via a calendar.
 
 
