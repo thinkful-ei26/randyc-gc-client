@@ -12,6 +12,21 @@ As a user you can currently set time block events with a day/date and a start an
 Exisitng time blocks can then be freely editied and deleted.
 These blocks are stored in your secure user account.
 
+## Screenshots:
+
+## User Log-in:
+![](images/user-log-in.png)
+
+## New User Registration:
+![](images/new-user-registration.png)
+
+## User Schedule View (Add Time Blcok Mode):
+![](images/main-view-add-mode.png)
+
+## User Schedule View (Edit Time Blcok Mode):
+![](images/main-view-edit-mode.png)
+
+
 ## Future Functionality
 Allow users to add themselves to a user group wherein they can share schedule information.
 This would allow viewable comparisons of a user schedule with that of his or her user group.   
