@@ -75,7 +75,12 @@ ul,li,.blocksList {
 
 }
 
+.adjustDayPicker {
 
+  width: 50px;
+  color: darkblue;
+
+}
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   
@@ -85,6 +90,8 @@ ul,li,.blocksList {
   }
   
 }
+
+
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   
@@ -96,18 +103,66 @@ ul,li,.blocksList {
 }
 
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 1351px) and (max-width: 1550px) {
   
   .adjustCalendar {
     text-align: center;
-    width: 370px;
+    width: 970px;
+  }
+  
+}
+
+@media (min-width: 1201px) and (max-width: 1350px) {
+  
+  .adjustCalendar {
+    text-align: center;
+    width: 670px;
+  }
+  
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+  
+  .adjustCalendar {
+    text-align: center;
+    width: 570px;
+  }
+  
+}
+
+@media (min-width: 801px) and (max-width: 1024px) {
+  
+  .adjustCalendar {
+    text-align: center;
+    width: 470px;
+  }
+  
+}
+
+@media (min-width: 569px) and (max-width: 800px) {
+  
+  .adjustCalendar {
+    
+    text-align: center;
+    width: 300px;
+  }
+  
+}
+
+@media (min-width: 481px) and (max-width: 568px) {
+  
+  .adjustCalendar {
+     
+    text-align: center;
+    width: 270px;
   }
   
 }
   
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 0px) and (max-width: 480px) {
   
   .adjustCalendar {
+     
     text-align: center;
     width: 270px;
   }

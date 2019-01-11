@@ -5,8 +5,8 @@ import 'fullcalendar/dist/fullcalendar.js';
 import 'fullcalendar/dist/fullcalendar.css';
 import goodcall from '../goodcall_image.png';
 
-import ShowCalendar from '../components/showcalendar'
-
+import ShowCalendar from '../components/showcalendar';
+import Display from '../components/display';
 import Navbar from '../components/navbar';
 import HeaderBar from '../components/header-bar';
  
@@ -21,6 +21,7 @@ import
  { fetchBlocksRequest,postBlockRequest,putBlockRequest,deleteBlockRequest } from '../actions/actions-blocks-api';
 
 import { formatDate, formatTime, formatFullCalendar } from '../utils/date';
+
   
 
 export class Dashboard extends React.Component {
@@ -36,8 +37,8 @@ export class Dashboard extends React.Component {
     modeMessage: 'Click below to ADD a new time block',
     buttonOneLabel: 'SAVE',
     buttonTwoLabel: 'RESET',
-    startDate : new Date(),
-    endDate : new Date(),
+    startDate : null,
+    endDate : null,
     captureBlockId: null,
     calendarEvents: []
       
@@ -264,26 +265,28 @@ render() {
           <br/>
           <img src={goodcall} alt='goodcall app'/> 
           <h3> { this.state.modeMessage } </h3>
-          
+          {/* <Display startDate={this.state.startDate} endDate={this.state.endDate}/> */}
           The current user: {this.props.usernameAuth}<br/>
-          The selected day is { formatDate(this.state.startDate)}<br/>
+          The selected day is {formatDate(this.state.startDate)}<br/>
           The start time is: {formatTime(this.state.startDate)}<br/>
           The end time is: {formatTime(this.state.endDate)}
           <br/>
           
 
         Select Start Month/Day: 
+        <div className="adjustDayPicker">
         <DatePicker
-
+          
           todayButton={"Today"} 
   
           selected={ this.state.startDate }
           onChange={this.handleStartSelect}
           placeholderText="Select a start Day"
-
+          width={'50px'}
           dateFormat="MMMM d, yyyy"
           
         />
+        </div>
         <hr />
         
         Select Start time for block: 
