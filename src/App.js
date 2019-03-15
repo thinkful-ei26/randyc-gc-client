@@ -1,10 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
-
 import './App.css';
-
-import HeaderBar from './components/header-bar';
 import LandingPage from './components/landing-page';
 import Dashboard from './components/dashboard';
 import RegistrationPage from './components/registration-page';
@@ -42,8 +39,7 @@ export class App extends React.Component {
 
     render() {
         return (
-            <div className="basic">
-                {/* <HeaderBar /> */}
+            <div className="AppContainer">
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={RegistrationPage} />

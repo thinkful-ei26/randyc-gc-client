@@ -23,25 +23,25 @@ export class RegistrationForm extends React.Component {
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
-                <label htmlFor="firstName">First name</label>
+                <label className='FormStyle' htmlFor="firstName">First name</label>
                 <Field component={Input} type="text" name="firstName" />
-                <label htmlFor="lastName">Last name</label>
+                <label className='FormStyle' htmlFor="lastName">Last name</label>
                 <Field component={Input} type="text" name="lastName" />
-                <label htmlFor="username">Username</label>
+                <label className='FormStyle' htmlFor="username">Username</label>
                 <Field
                     component={Input}
                     type="text"
                     name="username"
                     validate={[required, nonEmpty, isTrimmed]}
                 />
-                <label htmlFor="password">Password</label>
+                <label className='FormStyle' htmlFor="password">Password</label>
                 <Field
                     component={Input}
                     type="password"
                     name="password"
                     validate={[required, passwordLength, isTrimmed]}
                 />
-                <label htmlFor="passwordConfirm">Confirm password</label>
+                <label className='FormStyle' htmlFor="passwordConfirm">Confirm password</label>
                 <Field
                     component={Input}
                     type="password"
@@ -50,6 +50,7 @@ export class RegistrationForm extends React.Component {
                 />
                 <br/>
                 <button
+                    className='FormStyle' 
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
                     COMPLETE REGISTRATION

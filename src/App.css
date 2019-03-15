@@ -3,6 +3,27 @@
   font-size: 80%;
 }
 
+
+
+
+.adjustDayPicker {
+  width: 50px;
+  color: darkblue;
+}
+ 
+.AppContainer {
+  text-align: center;
+  margin: 0, auto;
+  box-sizing: border-box;
+  /* display: block;  */
+  width:100%;
+  height:100%;
+  min-height: 1000px;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -33,139 +54,276 @@
 }
 
 
-.centerStuff {
-
-  text-align: center;
-  color: darkblue;
-
-}
 
 .basic {
-  color: darkblue;
-  padding-top: 30px;
-  padding-left: 30px;
+/*   
+  width: 100%;
+  height:1000px;
+
+  text-align: left;
+  white-space:normal; */
+ 
+  background-color: rgb(172, 181, 204);
+   
+}
+
+
+.CalendarContainer {
+  margin-left: 200px;
+  padding-left: 20px;
+  text-align: right;
+  background-color: rgb(255, 252, 209);
+  width: 50%;
+  color: rgb(233, 93, 0);
+  font-size: 80%;
+}
+ 
+
+.FormStyle {
+  font-weight: 100;
+  font-style: normal;
+  font-family: 'Poppins', sans-serif;
+  line-height: 25px;
+  font-size: calc(8px + 2vmin);
+  color: rgb(33, 55, 156);
+  border: none;
+  text-decoration: none;
+}
+
+
+.HeaderBarContainer {
+  display: inline-block;
+  /* height: 12vmin;   */
+  width: 100%;
+  background-color: rgb(255, 238, 2);
+}
+
+
+.HeaderBarLogOut {
+  display: inline;
+  margin-right: 155px;
+  padding-bottom: 25px; 
 
 }
 
-ul,li,.blocksList {
+
+.HeaderBarLogoImage {
+  position: left;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  padding-left: 40px;
+  text-align: left;
+  margin: 0, auto;
+  width: 25%;
+}
+
+
+.HeaderBarButton {
+  font-weight: 100;
+  font-style: normal;
+  font-family: 'Poppins', sans-serif;
+  line-height: 25px;
+  font-size: calc(8px + 2vmin);
+  color: rgb(33, 55, 156);
+  border: none;
+  text-decoration: none;
+}
+
+.logoContainer {
+  text-align: center;
+  margin: 0, auto;
+  width: 100%;
+  background-color: rgb(255, 238, 2);
+}
+
+
+.logoImage {
+  padding-top: 20px;
+  padding-bottom: 15px;
+  text-align: center;
+  margin: 0, auto;
+  width: 85%;
+}
+
+.LandingPageContainer {
+  text-align: center;
+  background-color: rgb(172, 181, 204);
+  width: 100%;
+  height:2000px;
+
+  font-weight: 100;
+  font-style: normal;
+  font-family: 'Poppins', sans-serif;
+  line-height: 25px;
+  font-size: calc(8px + 2vmin);
+  color: rgb(33, 55, 156);
+  border: none;
+  text-decoration: none;
+}
+
+.MainContainer {
    
+  margin: 0;
+  background-color: rgb(172, 181, 204);
+}
+ 
+.navBar {
+  background-color: rgb(255, 123, 0);
+  padding-left: 30px;
+  padding-top: 15px;
+ 
+}
+
+.OrImage {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+  margin: 0, auto;
+  width: 25%;
+}
+
+.SideBarMenu {
+
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  /* z-index: 1; */
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  overflow: -moz-scrollbars-none;
+}
+
+.SideBarText {
+  padding-left: 30px;
+  font-weight: 100;
+  font-style: normal; 
+  font-family: 'Poppins', sans-serif;
+  line-height: 32px;
+  font-size: calc(10px + 2vmin);
+  color: rgb(33, 55, 156);
+  border-style: none;
+ 
+}
+ 
+ul,li,.blocksList { 
   color: grey;
   list-style: none;
   font-size: 80%;
-
-
 }
 
-.adjustCalendar {
 
-  float: right;
-  padding-top: 15px;
-  padding-right: 30px;
-  width: 900px;
-  color: darkblue;
-  font-size: 80%;
-   
+
+
+@media (min-width: 768px) {
+  
+.logoContainer {
+  text-align: center;
+  margin: 0, auto;
+  width: 100%;
+  background-color: rgb(255, 238, 2);
 }
 
-.navBar {
 
-  padding-left: 30px;
-  padding-top: 15px;
-
-
+.logoImage {
+  padding-top: 20px;
+  padding-bottom: 15px;
+  text-align: center;
+  margin: 0, auto;
+  width: 35%;
 }
 
-.adjustDayPicker {
 
-  width: 50px;
-  color: darkblue;
-
+  
 }
+
+
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
+/*   
   .adjustCalendar {
     text-align: center;
     width: 370px;
-  }
+  } */
   
 }
 
 
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  
+/*   
   .adjustCalendar {
     text-align: center;
     width: 570px;
   }
-  
+   */
 }
 
 
 @media (min-width: 1351px) and (max-width: 1550px) {
-  
+/*   
   .adjustCalendar {
     text-align: center;
     width: 970px;
-  }
+  } */
   
 }
 
 @media (min-width: 1201px) and (max-width: 1350px) {
-  
+/*   
   .adjustCalendar {
     text-align: center;
     width: 670px;
-  }
+  } */
   
 }
 
 @media (min-width: 1025px) and (max-width: 1200px) {
   
-  .adjustCalendar {
+  /* .adjustCalendar {
     text-align: center;
     width: 570px;
-  }
+  } */
   
 }
 
 @media (min-width: 801px) and (max-width: 1024px) {
-  
+/*   
   .adjustCalendar {
     text-align: center;
     width: 470px;
-  }
+  } */
   
 }
 
 @media (min-width: 569px) and (max-width: 800px) {
-  
+/*   
   .adjustCalendar {
     
     text-align: center;
     width: 300px;
-  }
+  } */
   
 }
 
 @media (min-width: 481px) and (max-width: 568px) {
-  
+/*   
   .adjustCalendar {
      
     text-align: center;
     width: 270px;
-  }
+  } */
   
 }
   
 @media (min-width: 0px) and (max-width: 480px) {
-  
+/*   
   .adjustCalendar {
      
     text-align: center;
     width: 270px;
-  }
+  } */
   
 }
 

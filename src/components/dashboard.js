@@ -1,15 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import 'fullcalendar/dist/fullcalendar.js';
 import 'fullcalendar/dist/fullcalendar.css';
-import goodcall from '../goodcall_image.png';
-
 import ShowCalendar from '../components/showcalendar';
-
-import Navbar from '../components/navbar';
-import HeaderBar from '../components/header-bar';
- 
+import HeaderBar from '../components/header-bar'; 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -34,7 +28,7 @@ export class Dashboard extends React.Component {
   this.state = {
 
     mode: 'ADD',
-    modeMessage: 'Click below to ADD a new time block',
+    modeMessage: 'SET YOUR GOOD TIMES',
     buttonOneLabel: 'SAVE',
     buttonTwoLabel: 'RESET',
     startDate : null,
@@ -62,7 +56,7 @@ if(selectById === null && this.state.mode === 'EDIT'){
     this.setState({
  
       mode: 'ADD',
-      modeMessage: 'Click below to ADD a new time block',
+      modeMessage: 'ADD A NEW TIME BLOCK',
       buttonOneLabel: 'SAVE',
       buttonTwoLabel: 'RESET',
       startDate : null,
@@ -99,9 +93,9 @@ if(selectById !== null && this.state.mode === 'ADD'){
     this.setState({
 
       mode: 'EDIT',
-      modeMessage: 'Click below to EDIT the selected time block',
+      modeMessage: 'EDIT A TIME BLOCK',
       buttonOneLabel: 'SAVE YOUR EDIT',
-      buttonTwoLabel: 'DELETE BLOCK',
+      buttonTwoLabel: 'DELETE TIME BLOCK',
       startDate : editStartTime,
       endDate : editEndTime,
       captureBlockId: editBlockId 
@@ -159,7 +153,7 @@ handleSaveButton = () => {
   this.setState({
  
       mode: 'ADD',
-      modeMessage: 'Click below to ADD a new time block',
+      modeMessage: 'ADD A NEW TIME BLOCK',
       buttonOneLabel: 'SAVE',
       buttonTwoLabel: 'RESET',
       startDate : null,
@@ -205,7 +199,7 @@ handleDeleteClicked = () => {
     this.setState({
  
       mode: 'ADD',
-      modeMessage: 'Click below to ADD a new time block',
+      modeMessage: 'ADD A NEW TIME BLOCK',
       buttonOneLabel: 'SAVE',
       buttonTwoLabel: 'RESET',
       startDate : null,
@@ -256,78 +250,70 @@ render() {
     return (
  
         <div className = "basic">
-
-          <HeaderBar />
-          <div id= "calendar" className ='adjustCalendar' >
-            <ShowCalendar startDate={this.state.startDate} rawEvents = {transformedEvents}/>
-          </div>
-
-          <br/>
-          <img src={goodcall} alt='goodcall app'/> 
-          <h3> { this.state.modeMessage } </h3>
-          {/* <Display startDate={this.state.startDate} endDate={this.state.endDate}/> */}
-          The current user: {this.props.usernameAuth}<br/>
-          The selected day is {formatDate(this.state.startDate)}<br/>
-          The start time is: {formatTime(this.state.startDate)}<br/>
-          The end time is: {formatTime(this.state.endDate)}
-          <br/>
+          <HeaderBar/>
+          <div className='MainContainer'>
+            <div className='SideBarMenu'>
+              <div className='SideBarText'>
+              <h3> { this.state.modeMessage } </h3>
+              <ul>
+              <li>The current user: {this.props.usernameAuth}</li>
+              <li>The selected day is {formatDate(this.state.startDate)}</li>
+              <li>The start time is: {formatTime(this.state.startDate)}</li>
+              <li>The end time is: {formatTime(this.state.endDate)}</li>
+            </ul>
+              <br/>
           
-
-        Select Start Month/Day: 
-        <div className="adjustDayPicker">
-        <DatePicker
-          
-          todayButton={"Today"} 
-  
-          selected={ this.state.startDate }
-          onChange={this.handleStartSelect}
-          placeholderText="Select a start Day"
-          width={'50px'}
-          dateFormat="MMMM d, yyyy"
-          
-        />
-        </div>
-        <hr />
-        
-        Select Start time for block: 
-        <DatePicker
-
-          selected={this.state.startDate}
-          onChange={this.handleStartSelect}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={15}
-          dateFormat="h:mm aa"
-          timeCaption="Time"
- 
-        />
-
-       <hr />
-        
-       Select End time for block:
-         <DatePicker
-
-          onChange={this.handleEndSelect}
-          // placeholderText="Select an end time" not working yet
-          selected={this.state.endDate}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={15}
-          // minTime={this.state.startDate}
-          // maxTime={new Date()}
-          dateFormat="h:mm aa"
-          timeCaption="Time"
-          
-       />
+              Select Start Month/Day: 
+              <div className="adjustDayPicker">
+            <DatePicker
+              className={'SideBarText'}
+              todayButton={"Today"} 
+              selected={ this.state.startDate }
+              onChange={this.handleStartSelect}
+              placeholderText="Select a start Day"
+              width={'50px'}
+              dateFormat="MMMM d, yyyy"
+              
+            />
+            </div>
          
-       <hr/>
-       <br/>
-       <button onClick={ this.handleSaveButton }>{this.state.buttonOneLabel}</button>
-       &nbsp;&nbsp;&nbsp;&nbsp;
-       <button onClick={ this.handleDeleteClicked }>{this.state.buttonTwoLabel}</button>
-       <br/>
-       <br/>
-       <hr/>
+              Select Start time for block: 
+              <DatePicker
+              className={'SideBarText'}
+              selected={this.state.startDate}
+              onChange={this.handleStartSelect}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              dateFormat="h:mm aa"
+              timeCaption="Time"
+              />
+              <br/> 
+              Select End time for block:
+              <DatePicker
+              className={'SideBarText'}
+              onChange={this.handleEndSelect}
+              selected={this.state.endDate}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              dateFormat="h:mm aa"
+              timeCaption="Time"
+              />
+         
+              <br/>
+              <button className='FormStyle' onClick={ this.handleSaveButton }>{this.state.buttonOneLabel}</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <button className='FormStyle' onClick={ this.handleDeleteClicked }>{this.state.buttonTwoLabel}</button>
+              <br/>
+              <br/>
+        
+            </div>
+            </div>
+            <div id= "calendar" className ='CalendarContainer' >
+              <ShowCalendar startDate={this.state.startDate} rawEvents = {transformedEvents}/>
+            </div>
+          </div>
        </div>
 
     );

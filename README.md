@@ -4,6 +4,7 @@ In the dark and distant past when landlines were the norm, the appropriate time 
 See the deployed version here: https://goodcall.herokuapp.com/
 
 Client repo lives here: https://github.com/thinkful-ei26/randyc-gc-client
+
 Server repo lives here: https://github.com/thinkful-ei26/randyc-gc-server
 
 ## Base Project Goal
