@@ -29,25 +29,11 @@ export class Dashboard extends React.Component {
     startDate : null,
     endDate : null,
     captureBlockId: null,
-    calendarEvents: [],
-    width:window.innerWidth
-      
-
+    calendarEvents: [] 
   }
 
 }
-
-//
-
-
-
-
-
-
-//
-
-
-//
+ 
 
 
 //Initiate getting users & blocks from db
@@ -88,12 +74,12 @@ if(selectById !== null && this.state.mode === 'ADD'){
     this.props.blocks.find(block => {
   
       if(justBlockId === block._id){
-
-        editStartTime = block.startDate;
-        editEndTime = block.endDate;
-        editBlockId = block._id;
-
+          editStartTime = block.startDate;
+          editEndTime = block.endDate;
+          editBlockId = block._id;
       }
+
+      return 'hello'
    
     });
  
@@ -319,22 +305,15 @@ render() {
           </div>
     ;
     
-    //TESTING
-    // const Div_A = <div className='Div_A'>STUFF A</div>;
-    // const Div_B = <div className='Div_B'>STUFF B</div>;
 
-    let divOrder = <div className='MainContainer'>{calendarContent}{sideBarContent}</div>;
- 
-
-    console.log('width',this.state.width);
-
-
+   const mainContent = <div className='MainContainer'>{calendarContent}{sideBarContent}</div>;
+   
     return (
  
         <div className = "basic">
           <HeaderBar/>
           <div className='MainContainer'>
-            {divOrder} 
+            {mainContent} 
           </div> 
         </div>
 
