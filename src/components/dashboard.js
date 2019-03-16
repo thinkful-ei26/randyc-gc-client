@@ -257,7 +257,7 @@ render() {
                   onChange={this.handleStartSelect}
                   placeholderText='Select a START Day'
                   width={'50px'}
-                  dateFormat='MMMM d, yyyy'
+                  dateFormat='MMMM d'
                 />
                 <p className='SideBarText'><b>START</b> time for block:</p>  
                 <DatePicker

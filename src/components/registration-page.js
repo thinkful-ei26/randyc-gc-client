@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 
-import goodcall from '../goodcall_image.png';
+import goodcall from '../resources/images/goodcall.png';
 
 import RegistrationForm from './registration-form';
 
@@ -15,10 +15,10 @@ export function RegistrationPage(props) {
     return (
         <div className="LandingPageContainer">
         <img src={goodcall} alt='goodcall app'/> 
-            <h2>Register for Good Call</h2>
+            <p><b>Register for GOODCALL</b></p>
             <RegistrationForm />
             <br/>
-            <Link to="/"><button className='FormStyle'>LOG IN EXISTING USER</button></Link>
+            <Link to="/"><button className='FormStyle'><b>LOG IN</b> EXISTING USER</button></Link>
         </div>
     );
 }

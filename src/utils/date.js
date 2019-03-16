@@ -10,7 +10,7 @@ export const formatDate = date => {
   
   }
 
-  return moment(date).format("dddd MMMM Do YYYY");
+  return moment(date).format("ddd  MMM  Do ");
  
 
 }//this gets the date object
