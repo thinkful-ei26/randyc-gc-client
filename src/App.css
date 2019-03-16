@@ -3,23 +3,14 @@
   font-size: 80%;
 }
 
-
-
-
-.adjustDayPicker {
-  width: 50px;
-  color: darkblue;
-}
  
 .AppContainer {
-  text-align: center;
-  margin: 0, auto;
   box-sizing: border-box;
-  /* display: block;  */
-  width:100%;
-  height:100%;
-  min-height: 1000px;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+   
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -56,34 +47,80 @@
 
 
 .basic {
-/*   
+    
   width: 100%;
   height:1000px;
 
-  text-align: left;
-  white-space:normal; */
+  text-align: center;
+  white-space:normal; 
  
   background-color: rgb(172, 181, 204);
    
 }
 
 
+
+.ButtonStyle {
+  font-weight: 100;
+  font-style: normal;
+  font-family: 'Poppins', sans-serif;
+  line-height: 25px;
+  font-size: calc(2px + 2vmin);
+  color:white;
+  background-color: rgb(33, 55, 156);
+  border: none;
+  text-decoration: none;
+}
+
+/* 
 .CalendarContainer {
-  margin-left: 200px;
-  padding-left: 20px;
-  text-align: right;
+  padding-right: 20px;
+  padding-right: 20px;
+  position: absolute;
+  left: 500px;
+  float: right;
   background-color: rgb(255, 252, 209);
-  width: 50%;
   color: rgb(233, 93, 0);
-  font-size: 80%;
+  font-size: 100%;
+} */
+
+
+.CalendarContainer {
+  padding-left: 30px; 
+  position: absolute;
+  right: 500px;
+  float: left;
+  background-color: rgb(250, 249, 233);
+  color: rgb(233, 93, 0);
+  font-size: 100%;
+  width: auto;
 }
  
+.DayPickerContainer {
+  text-align: left;
+}
+ 
+.Div_A {
+  float: left;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+}
+
+.Div_B {
+  float: right;
+  width: 30px;
+  height: 30px;
+  background-color: blue;
+}
+
+
 
 .FormStyle {
   font-weight: 100;
   font-style: normal;
   font-family: 'Poppins', sans-serif;
-  line-height: 25px;
+  line-height: 35px;
   font-size: calc(8px + 2vmin);
   color: rgb(33, 55, 156);
   border: none;
@@ -100,15 +137,17 @@
 
 
 .HeaderBarLogOut {
-  display: inline;
-  margin-right: 155px;
-  padding-bottom: 25px; 
+  float: right;
+  padding-right: 30px;
+  /* display: inline; */
+  /* margin-right: 155px; */
+  /* padding-bottom: 25px;  */
 
 }
 
 
 .HeaderBarLogoImage {
-  position: left;
+  float: left;
   padding-top: 20px;
   padding-bottom: 15px;
   padding-left: 40px;
@@ -163,8 +202,11 @@
 
 .MainContainer {
    
-  margin: 0;
+  width: auto;
+  height: stretch;
   background-color: rgb(172, 181, 204);
+  /* background-color: red; */
+
 }
  
 .navBar {
@@ -182,36 +224,54 @@
   width: 25%;
 }
 
-.SideBarMenu {
-
-  height: 100%;
-  width: 200px;
-  position: fixed;
+.SideBarContainer {
+  /* display: block; */
+  float: right;
+  text-align: left;
+  padding-top: 0px;
+  padding-right: 30px;
+  padding-left: 30px;
+  height: stretch;
+  width:auto; 
+  /* position: fixed; */
   /* z-index: 1; */
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  overflow: -moz-scrollbars-none;
+  /* top: 0;
+  left: 0; */
+  /* background-color: rgb(131, 117, 117); */
+  /* overflow-x: hidden;
+  overflow: -moz-scrollbars-none; */
 }
 
-.SideBarText {
-  padding-left: 30px;
+.SideBarText { 
   font-weight: 100;
   font-style: normal; 
   font-family: 'Poppins', sans-serif;
-  line-height: 32px;
-  font-size: calc(10px + 2vmin);
+  line-height: 28px;
+  font-size: calc(9px + 2vmin);
   color: rgb(33, 55, 156);
   border-style: none;
- 
+  list-style: none;
 }
- 
+
+.SideBarList {
+  margin-left: -35px;
+  font-weight: 100;
+  font-style: normal; 
+  font-family: 'Poppins', sans-serif;
+  line-height: 28px;
+  font-size: calc(4px + 2vmin);
+  color: rgb(33, 55, 156);
+  border-style: none;
+  list-style: none;
+
+}
+
+/*  
 ul,li,.blocksList { 
   color: grey;
   list-style: none;
   font-size: 80%;
-}
+} */
 
 
 
@@ -317,13 +377,82 @@ ul,li,.blocksList {
   
 }
   
-@media (min-width: 0px) and (max-width: 480px) {
-/*   
-  .adjustCalendar {
-     
+@media (max-width: 420px) {
+ 
+
+  .CalendarContainer {
+    top:100px;
+    margin: 0, auto;
+    position: absolute;
     text-align: center;
-    width: 270px;
-  } */
+     
+    padding-left: 0px;
+    padding-right: 0px;
+    position: center;
+    right: 0px;
+    left: 0px;
+    float: center;
+
+    background-color: rgb(255, 252, 209);
+    color: rgb(233, 93, 0);
+    font-size: 100%;
+  }
+
+   
+  .DayPickerContainer {
+    text-align: center;
+  }
+
+  .HeaderBarLogoImage {
+    float: left;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    text-align: left;
+    margin: 0, auto;
+    width: 55%;
+  }
+
+
+  .HeaderBarLogOut {
+    float: right;
+    padding-right: 20px;
+    /* display: inline; */
+    /* margin-right: 155px; */
+    /* padding-bottom: 25px;  */
+  }
+
+
+.MainContainer {
+  display: block;
+  margin: 0; 
+  width: 100%;
+  height: stretch;
+  background-color: rgb(172, 181, 204);
+  
+
+}
+
+
+.SideBarContainer {
+  margin: 0,auto;
+  right: 0;
+  left: 0;
+  position: absolute;
+  display: block; 
+  float: center;
+  text-align: center;
+  top:450px; 
+  padding-left: 0px;
+  padding-right: 0px;
+   
+  height: stretch;
+  width:100%; 
+/*    
+  background-color: rgb(131, 117, 117); */
+  /* overflow-x: hidden;
+  overflow: -moz-scrollbars-none; */
+}
   
 }
 

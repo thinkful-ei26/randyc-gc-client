@@ -6,17 +6,12 @@ import ShowCalendar from '../components/showcalendar';
 import HeaderBar from '../components/header-bar'; 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
-//Actions
-// import { fetchProtectedData } from '../actions/protected-data';
-// import { fetchUserRequest } from '../actions/actions-users-api';
-
+ 
 import
  { fetchBlocksRequest,postBlockRequest,putBlockRequest,deleteBlockRequest } from '../actions/actions-blocks-api';
 
 import { formatDate, formatTime, formatFullCalendar } from '../utils/date';
-
-  
+ 
 
 export class Dashboard extends React.Component {
 
@@ -34,12 +29,26 @@ export class Dashboard extends React.Component {
     startDate : null,
     endDate : null,
     captureBlockId: null,
-    calendarEvents: []
+    calendarEvents: [],
+    width:window.innerWidth
       
 
   }
 
 }
+
+//
+
+
+
+
+
+
+//
+
+
+//
+
 
 //Initiate getting users & blocks from db
 componentDidMount(){
@@ -75,17 +84,16 @@ if(selectById !== null && this.state.mode === 'ADD'){
     let editEndTime;
     let editBlockId;
      
-    //what is proper way to do this?
     //for local state to show in selected fields
-    const findObject = this.props.blocks.map((block) => {
+    this.props.blocks.find(block => {
   
-    if(justBlockId === block._id){
+      if(justBlockId === block._id){
 
-      editStartTime = block.startDate;
-      editEndTime = block.endDate;
-      editBlockId = block._id;
+        editStartTime = block.startDate;
+        editEndTime = block.endDate;
+        editBlockId = block._id;
 
-    }
+      }
    
     });
  
@@ -129,7 +137,7 @@ handleEndSelect = day => {
 
     
 
-    if(window.confirm('End time cannot be less than start time, re-enter please...')){
+    if(window.confirm('End time must be after start time...')){
 
       day = this.state.startDate;
 
@@ -245,76 +253,90 @@ render() {
 
     });
 
+    const sideBarContent = 
+          <div className='SideBarContainer'>
+              <p className='SideBarText'><b>{ this.state.modeMessage }</b></p>
+              <ul className='SideBarList'>
+                <li >Current user: <b>{this.props.usernameAuth}</b></li>
+                <li >Selected day is: <b>{formatDate(this.state.startDate)}</b></li>
+                <li >Start time is: <b>{formatTime(this.state.startDate)}</b></li>
+                <li >End time is: <b>{formatTime(this.state.endDate)}</b></li>
+              </ul>
+              <p className='SideBarText'><b>START</b>Month/Day:</p>  
+              <div className="DayPickerContainer">
+                <DatePicker
+                  className='SideBarText'
+                  todayButton={'Today'} 
+                  selected={this.state.startDate}
+                  onChange={this.handleStartSelect}
+                  placeholderText='Select a START Day'
+                  width={'50px'}
+                  dateFormat='MMMM d, yyyy'
+                />
+                <p className='SideBarText'><b>START</b> time for block:</p>  
+                <DatePicker
+                  className='SideBarText'
+                  selected={this.state.startDate}
+                  onChange={this.handleStartSelect}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  width={'50px'}
+                  dateFormat="h:mm aa"
+                  timeCaption="Time"
+                  placeholderText='Select a START Time'
+                />
+                <p className='SideBarText'><b>END</b> time for block:</p>  
+                <DatePicker
+                  className='SideBarText'
+                  selected={this.state.endDate}
+                  onChange={this.handleEndSelect}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  width={'50px'}
+                  dateFormat="h:mm aa"
+                  timeCaption="Time"
+                  placeholderText='Select an END Time'
+                />
+                <br/>
+              </div>
+              <div>
+              <br/>
+              
+              <button className='ButtonStyle' onClick={ this.handleSaveButton }>{this.state.buttonOneLabel}</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button className='ButtonStyle' onClick={ this.handleDeleteClicked }>{this.state.buttonTwoLabel}</button>
+              </div>
+              <br/>
+              <br/>
+            </div>
+    ;
      
+    const calendarContent = 
+          <div id= "calendar" className ='CalendarContainer' >
+            <ShowCalendar startDate={this.state.startDate} rawEvents = {transformedEvents}/>
+          </div>
+    ;
+    
+    //TESTING
+    // const Div_A = <div className='Div_A'>STUFF A</div>;
+    // const Div_B = <div className='Div_B'>STUFF B</div>;
+
+    let divOrder = <div className='MainContainer'>{calendarContent}{sideBarContent}</div>;
  
+
+    console.log('width',this.state.width);
+
+
     return (
  
         <div className = "basic">
           <HeaderBar/>
           <div className='MainContainer'>
-            <div className='SideBarMenu'>
-              <div className='SideBarText'>
-              <h3> { this.state.modeMessage } </h3>
-              <ul>
-              <li>The current user: {this.props.usernameAuth}</li>
-              <li>The selected day is {formatDate(this.state.startDate)}</li>
-              <li>The start time is: {formatTime(this.state.startDate)}</li>
-              <li>The end time is: {formatTime(this.state.endDate)}</li>
-            </ul>
-              <br/>
-          
-              Select Start Month/Day: 
-              <div className="adjustDayPicker">
-            <DatePicker
-              className={'SideBarText'}
-              todayButton={"Today"} 
-              selected={ this.state.startDate }
-              onChange={this.handleStartSelect}
-              placeholderText="Select a start Day"
-              width={'50px'}
-              dateFormat="MMMM d, yyyy"
-              
-            />
-            </div>
-         
-              Select Start time for block: 
-              <DatePicker
-              className={'SideBarText'}
-              selected={this.state.startDate}
-              onChange={this.handleStartSelect}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={15}
-              dateFormat="h:mm aa"
-              timeCaption="Time"
-              />
-              <br/> 
-              Select End time for block:
-              <DatePicker
-              className={'SideBarText'}
-              onChange={this.handleEndSelect}
-              selected={this.state.endDate}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={15}
-              dateFormat="h:mm aa"
-              timeCaption="Time"
-              />
-         
-              <br/>
-              <button className='FormStyle' onClick={ this.handleSaveButton }>{this.state.buttonOneLabel}</button>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <button className='FormStyle' onClick={ this.handleDeleteClicked }>{this.state.buttonTwoLabel}</button>
-              <br/>
-              <br/>
-        
-            </div>
-            </div>
-            <div id= "calendar" className ='CalendarContainer' >
-              <ShowCalendar startDate={this.state.startDate} rawEvents = {transformedEvents}/>
-            </div>
-          </div>
-       </div>
+            {divOrder} 
+          </div> 
+        </div>
 
     );
   }

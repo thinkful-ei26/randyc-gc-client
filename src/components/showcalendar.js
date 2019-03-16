@@ -30,29 +30,32 @@ export class ShowCalendar extends React.Component {
         <FullCalendar
          id = "theCalendar"
          header = {{
-            left: 'prev,next today myCustomButton',
+            left: 'prev,next today',
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         }}
-        themeSystem= 'bootstrap4'
+        themeSystem= 'standard'
         defaultDate={this.props.startDate}
         navLinks= {true} // can click day/week names to navigate views
         editable= {false}
         eventLimit= {true} // allow "more" link when too many events
         events = {this.props.rawEvents}
         eventClick = {(e) => {this.handleEventClick(e)}}
-        // width= {60}
-        // height= {100}
-        size= {50} 
-        // eventAfterAllRender = {
+        eventColor ={'rgb(33, 55, 156)'}
+        fontSize={70}
+        // size={'auto'}
+        // width= {'auto'}
+        // height= {550}
+        // size= {'50%'} 
+        eventAfterAllRender = {
 
-        //   function(view){
-        //     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        //        FullCalendar('changeView', 'agendaDay');
-        //     }
-        //   }
+          function(view){
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+               FullCalendar('changeView', 'agendaDay');
+            }
+          }
 
-        // }
+        }
          
       />
       	
