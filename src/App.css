@@ -274,112 +274,31 @@ ul,li,.blocksList {
 } */
 
 
-
+/*
 
 @media (min-width: 768px) {
   
-.logoContainer {
-  text-align: center;
-  margin: 0, auto;
-  width: 100%;
-  background-color: rgb(255, 238, 2);
-}
-
-
-.logoImage {
-  padding-top: 20px;
-  padding-bottom: 15px;
-  text-align: center;
-  margin: 0, auto;
-  width: 35%;
-}
-
-
-  
-}
-
-
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-/*   
-  .adjustCalendar {
+  .logoContainer {
     text-align: center;
-    width: 370px;
-  } */
-  
-}
-
-
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-/*   
-  .adjustCalendar {
-    text-align: center;
-    width: 570px;
+    margin: 0, auto;
+    width: 100%;
+    background-color: rgb(255, 238, 2);
   }
-   */
-}
 
 
-@media (min-width: 1351px) and (max-width: 1550px) {
-/*   
-  .adjustCalendar {
+  .logoImage {
+    padding-top: 20px;
+    padding-bottom: 15px;
     text-align: center;
-    width: 970px;
-  } */
-  
+    margin: 0, auto;
+    width: 35%;
+  }
+ 
 }
-
-@media (min-width: 1201px) and (max-width: 1350px) {
-/*   
-  .adjustCalendar {
-    text-align: center;
-    width: 670px;
-  } */
-  
-}
-
-@media (min-width: 1025px) and (max-width: 1200px) {
-  
-  /* .adjustCalendar {
-    text-align: center;
-    width: 570px;
-  } */
-  
-}
-
-@media (min-width: 801px) and (max-width: 1024px) {
-/*   
-  .adjustCalendar {
-    text-align: center;
-    width: 470px;
-  } */
-  
-}
-
-@media (min-width: 569px) and (max-width: 800px) {
-/*   
-  .adjustCalendar {
-    
-    text-align: center;
-    width: 300px;
-  } */
-  
-}
-
-@media (min-width: 481px) and (max-width: 568px) {
-/*   
-  .adjustCalendar {
-     
-    text-align: center;
-    width: 270px;
-  } */
-  
-}
+ 
   
 @media (max-width: 420px) {
- 
-
+  
   .CalendarContainer {
     top:100px;
     margin: 0, auto;
@@ -417,9 +336,7 @@ ul,li,.blocksList {
   .HeaderBarLogOut {
     float: right;
     padding-right: 20px;
-    /* display: inline; */
-    /* margin-right: 155px; */
-    /* padding-bottom: 25px;  */
+     
   }
 
 
@@ -448,12 +365,9 @@ ul,li,.blocksList {
    
   height: stretch;
   width:100%; 
-/*    
-  background-color: rgb(131, 117, 117); */
-  /* overflow-x: hidden;
-  overflow: -moz-scrollbars-none; */
+ 
 }
   
 }
 
- 
+*/ 
