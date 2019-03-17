@@ -50,6 +50,9 @@ componentDidMount(){
 componentDidUpdate(prevProps){
   
   const selectById = this.props.selectedBlock;
+  console.log('dashboard selectedBlock: ',selectById);
+
+  //change mode back to ADD mode after EDIT is complete
   if(selectById === null && this.state.mode === 'EDIT'){
    
       this.setState({
@@ -65,8 +68,9 @@ componentDidUpdate(prevProps){
       })
   
   }
-     
-  if(selectById !== null && this.state.mode === 'ADD'){
+   
+  //EDIT A BLOCK
+  if(selectById !== null && this.state.mode === 'EDIT'){
    
       let justBlockId = selectById.selectedBlock;
    
@@ -74,16 +78,20 @@ componentDidUpdate(prevProps){
       let editEndTime;
       let editBlockId;
        
-      //for local state to show in selected fields
-      const findId = this.props.blocks.map(block => {
+      //for local state to populate selection fields
+      this.props.blocks.find(block => {
     
         if(justBlockId === block._id){
+
+            console.log('matching block to edit: ',block);
+
             editStartTime = block.startDate;
             editEndTime = block.endDate;
             editBlockId = block._id;
         }
-   
-     
+
+        return null;
+    
       });
    
   
@@ -112,16 +120,15 @@ handleEventClick = event => {
   console.log('event.startDate: ', event.start);
   console.log('event.endDate: ', event.end);
 
-  // this.setState({
-  //   mode: 'EDIT',
-  //   startDate : event.start,
-  //   endDate : event.end,
-  //   modeMessage: 'EDIT A TIME BLOCK',
-  //   buttonOneLabel: 'SAVE YOUR EDIT',
-  //   buttonTwoLabel: 'DELETE TIME BLOCK',
-  //   captureBlockId: event._id
-
-  // })
+  this.setState({
+    mode: 'EDIT',
+    // startDate : event.start,
+    // endDate : event.end,
+    // modeMessage: 'EDIT A TIME BLOCK',
+    // buttonOneLabel: 'SAVE YOUR EDIT',
+    // buttonTwoLabel: 'DELETE TIME BLOCK',
+    // captureBlockId: event._id
+  })
   
   this.props.dispatch(selectBlock(event._id));
 
