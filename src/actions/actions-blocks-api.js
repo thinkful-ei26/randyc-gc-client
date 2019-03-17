@@ -172,7 +172,8 @@ export const DELETE_BLOCK_REQUEST = 'DELETE_BLOCK_REQUEST';
 export const deleteBlockRequest = (blockid) => (dispatch, getState) => {
   
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/blocks/delete/${blockid}`, {
+
+  return fetch(`${API_BASE_URL}/api/users/blocks/delete/${blockid}`, {
 
     method: 'DELETE',
     headers: {
