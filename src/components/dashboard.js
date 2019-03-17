@@ -24,11 +24,11 @@ export class Dashboard extends React.Component {
   this.state = {
 
     mode: 'ADD',
-    modeMessage: 'SET YOUR GOOD TIMES',
+    modeMessage: 'Click below to ADD a new time block',
     buttonOneLabel: 'SAVE',
     buttonTwoLabel: 'RESET',
-    startDate : null,
-    endDate : null,
+    startDate : new Date(),
+    endDate : new Date(),
     captureBlockId: null,
     calendarEvents: []
      
@@ -37,8 +37,222 @@ export class Dashboard extends React.Component {
   this.handleEventClick = this.handleEventClick.bind(this);
 
 }
- 
 
+
+ componentDidUpdate(prevProps){
+  
+  const selectById = this.props.selectedBlock;
+  if(selectById === null && this.state.mode === 'EDIT'){
+   
+      this.setState({
+   
+        mode: 'ADD',
+        modeMessage: 'Click below to ADD a new time block',
+        buttonOneLabel: 'SAVE',
+        buttonTwoLabel: 'RESET',
+        startDate : null,
+        endDate : null,
+        captureBlockId: null
+      
+      })
+  
+  }
+     
+  if(selectById !== null && this.state.mode === 'ADD'){
+   
+      let justBlockId = selectById.selectedBlock;
+   
+      let editStartTime;
+      let editEndTime;
+      let editBlockId;
+       
+      //what is proper way to do this?
+      //for local state to show in selected fields
+      const findObject = this.props.blocks.map((block) => {
+    
+      if(justBlockId === block._id){
+  
+        editStartTime = block.startDate;
+        editEndTime = block.endDate;
+        editBlockId = block._id;
+  
+      }
+     
+      });
+   
+  
+      this.setState({
+  
+        mode: 'EDIT',
+        modeMessage: 'Click below to EDIT the selected time block',
+        buttonOneLabel: 'SAVE YOUR EDIT',
+        buttonTwoLabel: 'DELETE BLOCK',
+        startDate : editStartTime,
+        endDate : editEndTime,
+        captureBlockId: editBlockId 
+       
+      })
+  
+    }
+   
+    
+  };
+   
+   //set start day & time
+   handleStartSelect = day => {
+     
+    this.setState({
+  
+      startDate: day,
+      endDate: day
+       
+    })
+    
+  };
+  
+  //set end day & time
+  handleEndSelect = day => {
+  
+    //has to be a better way...
+    if(day <= this.state.startDate){
+  
+      
+  
+      if(window.confirm('End time cannot be less than start time, re-enter please...')){
+  
+        day = this.state.startDate;
+  
+      }
+  
+    }
+    
+  
+    this.setState({
+  
+      endDate: day
+       
+    })
+    
+  };
+  
+  //SAVE BLOCK as new or after EDIT
+  handleSaveButton = () => {
+   
+  
+    this.setState({
+   
+        mode: 'ADD',
+        modeMessage: 'Click below to ADD a new time block',
+        buttonOneLabel: 'SAVE',
+        buttonTwoLabel: 'RESET',
+        startDate : null,
+        endDate : null,
+        captureBlockId: null 
+    })
+  
+  
+    if(this.state.mode === 'ADD'){
+  
+      this.props.dispatch(postBlockRequest({
+        
+        startDate: this.state.startDate,
+        endDate: this.state.endDate
+    
+      }));
+  
+   
+    }
+   
+    if(this.state.mode === 'EDIT'){
+  
+      this.props.dispatch(putBlockRequest({
+        
+        _id: this.state.captureBlockId,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate
+    
+      }));
+   
+    }
+    
+  }
+   
+  //DELETE or RESET BLOCK
+  handleDeleteClicked = () => {
+  
+    //RESET
+    if(this.state.mode === 'ADD'){
+  
+      this.setState({
+   
+        mode: 'ADD',
+        modeMessage: 'Click below to ADD a new time block',
+        buttonOneLabel: 'SAVE',
+        buttonTwoLabel: 'RESET',
+        startDate : null,
+        endDate : null,
+        captureBlockId: null
+      
+      })
+  
+  
+    }
+  
+    //DELETE BLOCK
+    if(this.state.mode === 'EDIT'){
+  
+      if(window.confirm('Are you sure?')){
+    
+        this.props.dispatch(deleteBlockRequest(this.state.captureBlockId));
+    
+      }
+  
+    }
+   
+     
+  }
+  
+  //On click it puts the event info into the event form
+  handleEventClick = event => {
+    
+    const transfer = {
+      
+      selectedBlock: event._id
+       
+    };
+
+    console.log('dashboard id of block: ',transfer)
+ 
+    this.props.dispatch(selectBlock(transfer));
+ 
+  } 
+    
+  render() {
+  
+      //map the blocks stuff to new array for calendar events....
+      let transformedEvents = [];
+   
+      //Calendar events
+      transformedEvents = this.props.blocks.map((block,index) => {
+  
+        return {
+  
+          _id: block._id,
+          title: 'Good Time',
+          start: formatFullCalendar(block.startDate),
+          end: formatFullCalendar(block.endDate)
+  
+        }
+  
+      });
+  
+
+
+
+
+
+ 
+/* REF
 
 //Initiate getting users & blocks from db
 componentDidMount(){
@@ -245,6 +459,11 @@ handleDeleteClicked = () => {
 }
 
   
+
+
+*/
+
+
 render() {
 
     console.log('current blocks: ',this.props.blocks);
