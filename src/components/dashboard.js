@@ -75,15 +75,18 @@ componentDidMount(){
        
       //what is proper way to do this?
       //for local state to show in selected fields
-      const findObject = this.props.blocks.map((block) => {
+      //const findObject = this.props.blocks.map((block) => {
+      this.props.blocks.find((block) => {
     
-      if(justBlockId === block._id){
+        if(justBlockId === block._id){
   
-        editStartTime = block.startDate;
-        editEndTime = block.endDate;
-        editBlockId = block._id;
+          editStartTime = block.startDate;
+          editEndTime = block.endDate;
+          editBlockId = block._id;
   
-      }
+        }
+
+        return null;
      
       });
    
@@ -534,7 +537,7 @@ render() {
     ;
     
 
-   const mainContent = <div className='MainContainer'>{calendarContent}{sideBarContent}</div>;
+   const mainContent = <div className='MainContainer'>{sideBarContent}{calendarContent}</div>;
    
     return (
  

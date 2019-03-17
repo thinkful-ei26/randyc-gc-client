@@ -3,9 +3,7 @@ import { API_BASE_URL } from '../config';
 //async actions to work with blocks API
 export const SELECT_BLOCK = 'SELECT_BLOCK';
 export const selectBlock = blockId => {
-
-  console.log('id at select block action: ',blockId);
-
+  
   return{ 
     
     type: 'SELECT_BLOCK',

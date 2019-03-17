@@ -86,14 +86,18 @@
 
 
 .CalendarContainer {
-  padding-left: 30px; 
-  position: absolute;
-  right: 500px;
-  float: left;
+   
+  padding-left: 0px; 
+  position: inline;
+  float: right;
+  top: 100px;
+  right: 0px;
+  display: float;
   background-color: rgb(250, 249, 233);
   color: rgb(233, 93, 0);
   font-size: 100%;
-  width: auto;
+  width: 70%;
+  height: 70%;
 }
  
 .DayPickerContainer {
@@ -205,6 +209,8 @@
   width: auto;
   height: stretch;
   background-color: rgb(172, 181, 204);
+  padding-left: 20px; 
+  padding-right: 20px; 
   /* background-color: red; */
 
 }
@@ -225,29 +231,20 @@
 }
 
 .SideBarContainer {
-  /* display: block; */
-  float: right;
+  display: inline-block;
   text-align: left;
   padding-top: 0px;
-  padding-right: 30px;
-  padding-left: 30px;
-  height: stretch;
-  width:auto; 
-  /* position: fixed; */
-  /* z-index: 1; */
-  /* top: 0;
-  left: 0; */
-  /* background-color: rgb(131, 117, 117); */
-  /* overflow-x: hidden;
-  overflow: -moz-scrollbars-none; */
+  padding-right: 0px;
+   
 }
 
 .SideBarText { 
+  text-align: left;
   font-weight: 100;
   font-style: normal; 
   font-family: 'Poppins', sans-serif;
   line-height: 28px;
-  font-size: calc(9px + 2vmin);
+  font-size: 18px;
   color: rgb(33, 55, 156);
   border-style: none;
   list-style: none;
@@ -273,6 +270,83 @@ ul,li,.blocksList {
   font-size: 80%;
 } */
 
+
+ 
+@media (min-width: 0px) and (max-width: 600px) {
+
+
+  .CalendarContainer {
+    top:100px;
+    margin: 0, auto;
+    /* position: absolute; */
+    text-align: center;
+    display: block; 
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    /* position: center; */
+    right: 0px;
+    left: 0px;
+    float: center;
+
+    background-color: rgb(255, 252, 209);
+    color: rgb(233, 93, 0);
+    font-size: 100%;
+  }
+
+   
+  .DayPickerContainer {
+    text-align: center;
+  }
+
+  .HeaderBarLogoImage {
+    float: left;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    text-align: left;
+    margin: 0, auto;
+    width: 55%;
+  }
+
+
+  .HeaderBarLogOut {
+    float: right;
+    padding-right: 20px;
+     
+  }
+
+
+.MainContainer {
+  display: block;
+  padding: 10px;
+  margin: 0; 
+  width: 100%;
+  height: stretch;
+  background-color: rgb(172, 181, 204);
+   
+}
+
+
+.SideBarContainer {
+  margin: 0,auto;
+  right: 0;
+  left: 0;
+  /* position: absolute; */
+  display: block; 
+  float: center;
+  text-align: center;
+  /* top:450px;  */
+  padding-left: 0px;
+  padding-right: 0px;
+   
+  height: stretch;
+  width:100%; 
+ 
+}
+
+
+}
 
 /*
 
