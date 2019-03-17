@@ -227,28 +227,7 @@ export class Dashboard extends React.Component {
  
   } 
     
-  render() {
   
-      //map the blocks stuff to new array for calendar events....
-      let transformedEvents = [];
-   
-      //Calendar events
-      transformedEvents = this.props.blocks.map((block,index) => {
-  
-        return {
-  
-          _id: block._id,
-          title: 'Good Time',
-          start: formatFullCalendar(block.startDate),
-          end: formatFullCalendar(block.endDate)
-  
-        }
-  
-      });
-  
-
-
-
 
 
  
