@@ -6,6 +6,7 @@ import ShowCalendar from '../components/showcalendar';
 import HeaderBar from '../components/header-bar'; 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { selectBlock } from '../actions/actions-blocks-api';
  
 import
  { fetchBlocksRequest,postBlockRequest,putBlockRequest,deleteBlockRequest } from '../actions/actions-blocks-api';
@@ -29,8 +30,11 @@ export class Dashboard extends React.Component {
     startDate : null,
     endDate : null,
     captureBlockId: null,
-    calendarEvents: [] 
+    calendarEvents: []
+     
   }
+
+  this.handleEventClick = this.handleEventClick.bind(this);
 
 }
  
@@ -45,66 +49,86 @@ componentDidMount(){
 
 componentDidUpdate(prevProps){
   
-const selectById = this.props.selectedBlock;
-if(selectById === null && this.state.mode === 'EDIT'){
- 
-    this.setState({
- 
-      mode: 'ADD',
-      modeMessage: 'ADD A NEW TIME BLOCK',
-      buttonOneLabel: 'SAVE',
-      buttonTwoLabel: 'RESET',
-      startDate : null,
-      endDate : null,
-      captureBlockId: null
-    
-    })
-
-}
+  const selectById = this.props.selectedBlock;
+  if(selectById === null && this.state.mode === 'EDIT'){
    
-if(selectById !== null && this.state.mode === 'ADD'){
- 
-    let justBlockId = selectById.selectedBlock;
- 
-    let editStartTime;
-    let editEndTime;
-    let editBlockId;
-     
-    //for local state to show in selected fields
-    this.props.blocks.find(block => {
+      this.setState({
+   
+        mode: 'ADD',
+        modeMessage: 'ADD A NEW TIME BLOCK',
+        buttonOneLabel: 'SAVE',
+        buttonTwoLabel: 'RESET',
+        startDate : null,
+        endDate : null,
+        captureBlockId: null
+      
+      })
   
-      if(justBlockId === block._id){
-          editStartTime = block.startDate;
-          editEndTime = block.endDate;
-          editBlockId = block._id;
-      }
-
-      return 'hello'
-   
-    });
- 
-
-    this.setState({
-
-      mode: 'EDIT',
-      modeMessage: 'EDIT A TIME BLOCK',
-      buttonOneLabel: 'SAVE YOUR EDIT',
-      buttonTwoLabel: 'DELETE TIME BLOCK',
-      startDate : editStartTime,
-      endDate : editEndTime,
-      captureBlockId: editBlockId 
-     
-    })
-
   }
- 
+     
+  if(selectById !== null && this.state.mode === 'ADD'){
+   
+      let justBlockId = selectById.selectedBlock;
+   
+      let editStartTime;
+      let editEndTime;
+      let editBlockId;
+       
+      //for local state to show in selected fields
+      const findId = this.props.blocks.map(block => {
+    
+        if(justBlockId === block._id){
+            editStartTime = block.startDate;
+            editEndTime = block.endDate;
+            editBlockId = block._id;
+        }
+   
+     
+      });
+   
   
-}
+      this.setState({
+  
+        mode: 'EDIT',
+        modeMessage: 'EDIT A TIME BLOCK',
+        buttonOneLabel: 'SAVE YOUR EDIT',
+        buttonTwoLabel: 'DELETE TIME BLOCK',
+        startDate : editStartTime,
+        endDate : editEndTime,
+        captureBlockId: editBlockId 
+       
+      })
+  
+    }
+   
+    
+  }
 
+//On click it puts the event info into the event form
+handleEventClick = event => {
+  
+  console.log('full event: ', event);
+  console.log('event._id: ', event._id);
+  console.log('event.startDate: ', event.start);
+  console.log('event.endDate: ', event.end);
 
+  // this.setState({
+  //   mode: 'EDIT',
+  //   startDate : event.start,
+  //   endDate : event.end,
+  //   modeMessage: 'EDIT A TIME BLOCK',
+  //   buttonOneLabel: 'SAVE YOUR EDIT',
+  //   buttonTwoLabel: 'DELETE TIME BLOCK',
+  //   captureBlockId: event._id
 
- //set start day & time
- handleStartSelect = day => {
+  // })
+  
+  this.props.dispatch(selectBlock(event._id));
+
+};
+
+//set start day & time
+handleStartSelect = day => {
    
   this.setState({
 
@@ -121,8 +145,6 @@ handleEndSelect = day => {
   //has to be a better way...
   if(day <= this.state.startDate){
 
-    
-
     if(window.confirm('End time must be after start time...')){
 
       day = this.state.startDate;
@@ -130,8 +152,7 @@ handleEndSelect = day => {
     }
 
   }
-  
-
+   
   this.setState({
 
     endDate: day
@@ -143,7 +164,6 @@ handleEndSelect = day => {
 //SAVE BLOCK as new or after EDIT
 handleSaveButton = () => {
  
-
   this.setState({
  
       mode: 'ADD',
@@ -155,7 +175,6 @@ handleSaveButton = () => {
       captureBlockId: null 
   })
 
-
   if(this.state.mode === 'ADD'){
 
     this.props.dispatch(postBlockRequest({
@@ -165,7 +184,6 @@ handleSaveButton = () => {
   
     }));
 
- 
   }
  
   if(this.state.mode === 'EDIT'){
@@ -181,9 +199,7 @@ handleSaveButton = () => {
   }
   
 }
-
  
-
 //DELETE or RESET BLOCK
 handleDeleteClicked = () => {
 
@@ -202,25 +218,29 @@ handleDeleteClicked = () => {
     
     })
 
-
   }
 
   //DELETE BLOCK
   if(this.state.mode === 'EDIT'){
 
+    //console.log('Dashboard --> id to be deleted: ', this.state.captureBlockId);
+
+    console.log('Dashboard --> id to be deleted: ', this.props.selectedBlock);
+ 
     if(window.confirm('Are you sure?')){
   
-      this.props.dispatch(deleteBlockRequest(this.state.captureBlockId));
+      this.props.dispatch(deleteBlockRequest(this.props.selectedBlock));
   
     }
 
   }
- 
    
 }
 
   
 render() {
+
+    console.log('current blocks: ',this.props.blocks);
 
     //map the blocks stuff to new array for calendar events....
     let transformedEvents = [];
@@ -301,7 +321,7 @@ render() {
      
     const calendarContent = 
           <div id= "calendar" className ='CalendarContainer' >
-            <ShowCalendar startDate={this.state.startDate} rawEvents = {transformedEvents}/>
+            <ShowCalendar handleEventClick ={this.handleEventClick} startDate={this.state.startDate} rawEvents = {transformedEvents}/>
           </div>
     ;
     

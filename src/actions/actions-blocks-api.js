@@ -4,6 +4,8 @@ import { API_BASE_URL } from '../config';
 export const SELECT_BLOCK = 'SELECT_BLOCK';
 export const selectBlock = blockId => {
 
+  console.log('id at select block action: ',blockId);
+
   return{ 
     
     type: 'SELECT_BLOCK',
@@ -129,10 +131,12 @@ export const putBlockRequest = (block) => (dispatch,getState) => {
  
   //console.log('put block request!', getState().usersReducer.userId);
   block.userRef = getState().usersReducer.userId;
-
-  //console.log('the put object!', block);
+  
+  console.log('block id at put action: ',block._id);
   
   const authToken = getState().auth.authToken;
+
+
   return fetch(`${API_BASE_URL}/api/users/blocks/put/${block._id}`, {
 
     method: 'PUT',
@@ -172,8 +176,10 @@ export const putBlockSuccess = (block) => {
 export const DELETE_BLOCK_REQUEST = 'DELETE_BLOCK_REQUEST';
 export const deleteBlockRequest = (blockid) => (dispatch, getState) => {
 
+  console.log('block id at delete action: ',blockid);
+
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/blocks/delete/${blockid}`, {
+  return fetch(`${API_BASE_URL}/api/users/blocks/delete/${blockid}`, {
 
     method: 'DELETE',
     headers: {
@@ -195,6 +201,7 @@ export const DELETE_BLOCK_SUCCESS = 'DELETE_BLOCK_SUCCESS';
 export const deleteBlockSuccess = (blockid) => {
 
   console.log('delete success');
+  console.log('delete id',blockid);
 
   return {
 
