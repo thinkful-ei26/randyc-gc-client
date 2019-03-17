@@ -167,13 +167,9 @@ export function blocksReducer(state=initialState,action) {
 
 
   if(action.type === DELETE_BLOCK_SUCCESS){
-
-    console.log('Reducer --> id to be deleted: ', action.blockid);
-
+  
     const newArr = state.blocks.filter(block => block._id !== action.blockid);
-
-    console.log('Reducer --> transferObject: ', newArr);
-
+ 
     return Object.assign({}, state, {
  
       blocks: newArr,

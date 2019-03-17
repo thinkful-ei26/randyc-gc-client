@@ -129,11 +129,8 @@ export const postBlockError = (error) => {
 export const PUT_BLOCK_REQUEST = 'PUT_BLOCK_REQUEST';
 export const putBlockRequest = (block) => (dispatch,getState) => {
  
-  //console.log('put block request!', getState().usersReducer.userId);
   block.userRef = getState().usersReducer.userId;
-  
-  console.log('block id at put action: ',block._id);
-  
+   
   const authToken = getState().auth.authToken;
 
 
@@ -159,9 +156,7 @@ export const putBlockRequest = (block) => (dispatch,getState) => {
 
 export const PUT_BLOCK_SUCCESS = 'PUT_BLOCK_SUCCESS';
 export const putBlockSuccess = (block) => {
-  
-  //console.log('put block!>>> ', block);
-
+   
   return {
 
     type: 'PUT_BLOCK_SUCCESS',
@@ -175,9 +170,7 @@ export const putBlockSuccess = (block) => {
 //DELETE a block 
 export const DELETE_BLOCK_REQUEST = 'DELETE_BLOCK_REQUEST';
 export const deleteBlockRequest = (blockid) => (dispatch, getState) => {
-
-  console.log('block id at delete action: ',blockid);
-
+  
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/api/users/blocks/delete/${blockid}`, {
 
@@ -199,9 +192,6 @@ export const deleteBlockRequest = (blockid) => (dispatch, getState) => {
 
 export const DELETE_BLOCK_SUCCESS = 'DELETE_BLOCK_SUCCESS';
 export const deleteBlockSuccess = (blockid) => {
-
-  console.log('delete success');
-  console.log('delete id',blockid);
 
   return {
 

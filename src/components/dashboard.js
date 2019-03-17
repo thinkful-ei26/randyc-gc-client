@@ -38,6 +38,13 @@ export class Dashboard extends React.Component {
 
 }
 
+//Initiate getting users & blocks from db
+componentDidMount(){
+
+  this.props.dispatch(fetchBlocksRequest());
+ 
+}
+
 
  componentDidUpdate(prevProps){
   
@@ -220,9 +227,7 @@ export class Dashboard extends React.Component {
       selectedBlock: event._id
        
     };
-
-    console.log('dashboard id of block: ',transfer)
- 
+  
     this.props.dispatch(selectBlock(transfer));
  
   } 
@@ -444,9 +449,7 @@ handleDeleteClicked = () => {
 
 
 render() {
-
-    console.log('current blocks: ',this.props.blocks);
-
+  
     //map the blocks stuff to new array for calendar events....
     let transformedEvents = [];
  
