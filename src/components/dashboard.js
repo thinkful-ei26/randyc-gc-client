@@ -24,7 +24,7 @@ export class Dashboard extends React.Component {
   this.state = {
 
     mode: 'ADD',
-    modeMessage: 'Click below to ADD a new time block',
+    modeMessage: 'ADD TIME BLOCK',
     buttonOneLabel: 'SAVE',
     buttonTwoLabel: 'RESET',
     startDate : new Date(),
@@ -54,7 +54,7 @@ componentDidMount(){
       this.setState({
    
         mode: 'ADD',
-        modeMessage: 'Click below to ADD a new time block',
+        modeMessage: 'ADD TIME BLOCK',
         buttonOneLabel: 'SAVE',
         buttonTwoLabel: 'RESET',
         startDate : null,
@@ -91,8 +91,8 @@ componentDidMount(){
       this.setState({
   
         mode: 'EDIT',
-        modeMessage: 'Click below to EDIT the selected time block',
-        buttonOneLabel: 'SAVE YOUR EDIT',
+        modeMessage: 'EDIT TIME BLOCK',
+        buttonOneLabel: 'SAVE EDIT',
         buttonTwoLabel: 'DELETE BLOCK',
         startDate : editStartTime,
         endDate : editEndTime,
@@ -149,7 +149,7 @@ componentDidMount(){
     this.setState({
    
         mode: 'ADD',
-        modeMessage: 'Click below to ADD a new time block',
+        modeMessage: 'ADD TIME BLOCK',
         buttonOneLabel: 'SAVE',
         buttonTwoLabel: 'RESET',
         startDate : null,
@@ -193,7 +193,7 @@ componentDidMount(){
       this.setState({
    
         mode: 'ADD',
-        modeMessage: 'Click below to ADD a new time block',
+        modeMessage: 'ADD TIME BLOCK',
         buttonOneLabel: 'SAVE',
         buttonTwoLabel: 'RESET',
         startDate : null,
