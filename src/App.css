@@ -1,16 +1,19 @@
 .App {
   text-align: center;
   font-size: 80%;
+  
 }
 
  
 .AppContainer {
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+  width: stretch;
+  height: stretch;
   margin: 0;
   text-align: center;
-   
+  min-width: 400px;
+
+  background-color: rgb(172, 181, 204);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -71,20 +74,7 @@
   border: none;
   text-decoration: none;
 }
-
-/* 
-.CalendarContainer {
-  padding-right: 20px;
-  padding-right: 20px;
-  position: absolute;
-  left: 500px;
-  float: right;
-  background-color: rgb(255, 252, 209);
-  color: rgb(233, 93, 0);
-  font-size: 100%;
-} */
-
-
+  
 .CalendarContainer {
    
   padding-left: 0px; 
@@ -251,53 +241,53 @@
 }
 
 .SideBarList {
-  margin-left: -35px;
+  margin-left: -15px;
   font-weight: 100;
   font-style: normal; 
   font-family: 'Poppins', sans-serif;
-  line-height: 28px;
-  font-size: calc(4px + 2vmin);
+  line-height: 18px;
+  font-size: 14px;
   color: rgb(33, 55, 156);
   border-style: none;
+  background-color: rgb(250, 249, 233);
+  padding: 5px;
+  border-radius: 5px;
   list-style: none;
-
 }
-
-/*  
-ul,li,.blocksList { 
-  color: grey;
-  list-style: none;
-  font-size: 80%;
-} */
-
-
  
+
 @media (min-width: 0px) and (max-width: 600px) {
 
 
-  .CalendarContainer {
-    top:100px;
-    margin: 0, auto;
-    /* position: absolute; */
-    text-align: center;
-    display: block; 
+  .CalendarContainer { 
+    padding-top: 0px;
+    padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    padding-bottom: 0px;
-    /* position: center; */
-    right: 0px;
-    left: 0px;
-    float: center;
-
-    background-color: rgb(255, 252, 209);
+    display: center; 
+    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: rgb(250, 249, 233);
     color: rgb(233, 93, 0);
     font-size: 100%;
+    width: 100%;
+    height: 100%;
   }
 
    
   .DayPickerContainer {
     text-align: center;
   }
+
+
+
+.HeaderBarContainer {
+  position: top;
+  /* height: 12vmin;   */
+  width: stretch;
+  background-color: rgb(255, 238, 2);
+}
 
   .HeaderBarLogoImage {
     float: left;
@@ -312,39 +302,57 @@ ul,li,.blocksList {
 
   .HeaderBarLogOut {
     float: right;
-    padding-right: 20px;
+    padding-right: 40px;
      
   }
 
 
-.MainContainer {
+  .MainContainer {
   display: block;
-  padding: 10px;
-  margin: 0; 
-  width: 100%;
+  text-align: center;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 17px;
+  margin-left: 0px; 
+  margin-right: 0px; 
+  margin: 0;
+  width: 378px;
   height: stretch;
   background-color: rgb(172, 181, 204);
    
-}
+  }
 
 
-.SideBarContainer {
-  margin: 0,auto;
-  right: 0;
-  left: 0;
-  /* position: absolute; */
-  display: block; 
-  float: center;
-  text-align: center;
-  /* top:450px;  */
-  padding-left: 0px;
-  padding-right: 0px;
-   
-  height: stretch;
-  width:100%; 
+  .SideBarContainer {
+    display: block;
+    text-align: center;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-left: 0px; 
+    margin-right: 0px; 
+    margin: 0;
+    /* display: block;
+    margin: 0, auto;
+    text-align: center;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-left: 0px; */
+  }
+
+
+  .SideBarText { 
+    text-align: center;
+    font-weight: 100;
+    font-style: normal; 
+    font-family: 'Poppins', sans-serif;
+    line-height: 25px;
+    font-size: 18px;
+    color: rgb(33, 55, 156);
+    border-style: none;
+    list-style: none;
+  }
  
-}
-
 
 }
 
@@ -370,7 +378,9 @@ ul,li,.blocksList {
  
 }
  
-  
+*/
+
+/*
 @media (max-width: 420px) {
   
   .CalendarContainer {
@@ -414,34 +424,31 @@ ul,li,.blocksList {
   }
 
 
-.MainContainer {
-  display: block;
-  margin: 0; 
-  width: 100%;
-  height: stretch;
-  background-color: rgb(172, 181, 204);
-  
-
-}
+  .MainContainer {
+    display: block;
+    margin: 0; 
+    width: 100%;
+    height: stretch;
+    background-color: rgb(172, 181, 204);
+  }
 
 
-.SideBarContainer {
-  margin: 0,auto;
-  right: 0;
-  left: 0;
-  position: absolute;
-  display: block; 
-  float: center;
-  text-align: center;
-  top:450px; 
-  padding-left: 0px;
-  padding-right: 0px;
+  .SideBarContainer {
+    margin: 0,auto;
+    right: 0;
+    left: 0;
+    position: absolute;
+    display: block; 
+    float: center;
+    text-align: center;
+    top:450px; 
+    padding-left: 0px;
+    padding-right: 0px;
    
-  height: stretch;
-  width:100%; 
+    height: stretch;
+    width:100%; 
  
-}
+  }
   
 }
-
-*/ 
+ */ 

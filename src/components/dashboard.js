@@ -95,8 +95,8 @@ componentDidMount(){
   
         mode: 'EDIT',
         modeMessage: 'EDIT TIME BLOCK',
-        buttonOneLabel: 'SAVE EDIT',
-        buttonTwoLabel: 'DELETE BLOCK',
+        buttonOneLabel: 'SAVE',
+        buttonTwoLabel: 'DELETE',
         startDate : editStartTime,
         endDate : editEndTime,
         captureBlockId: editBlockId 
@@ -472,14 +472,15 @@ render() {
 
     const sideBarContent = 
           <div className='SideBarContainer'>
-              <p className='SideBarText'><b>{ this.state.modeMessage }</b></p>
               <ul className='SideBarList'>
                 <li >Current user: <b>{this.props.usernameAuth}</b></li>
-                <li >Selected day is: <b>{formatDate(this.state.startDate)}</b></li>
+                {/* <li >Selected day is: <b>{formatDate(this.state.startDate)}</b></li>
                 <li >Start time is: <b>{formatTime(this.state.startDate)}</b></li>
-                <li >End time is: <b>{formatTime(this.state.endDate)}</b></li>
+                <li >End time is: <b>{formatTime(this.state.endDate)}</b></li> */}
               </ul>
-              <p className='SideBarText'><b>START</b>Month/Day:</p>  
+              
+              <p className='SideBarText'><b>{ this.state.modeMessage }</b></p>
+              <p className='SideBarText'><b>DAY</b> selected</p>  
               <div className="DayPickerContainer">
                 <DatePicker
                   className='SideBarText'
@@ -490,7 +491,7 @@ render() {
                   width={'50px'}
                   dateFormat='MMMM d'
                 />
-                <p className='SideBarText'><b>START</b> time for block:</p>  
+                <p className='SideBarText'><b>START</b> time</p>  
                 <DatePicker
                   className='SideBarText'
                   selected={this.state.startDate}
@@ -503,7 +504,7 @@ render() {
                   timeCaption="Time"
                   placeholderText='Select a START Time'
                 />
-                <p className='SideBarText'><b>END</b> time for block:</p>  
+                <p className='SideBarText'><b>END</b> time</p>  
                 <DatePicker
                   className='SideBarText'
                   selected={this.state.endDate}
@@ -537,15 +538,13 @@ render() {
     ;
     
 
-   const mainContent = <div className='MainContainer'>{sideBarContent}{calendarContent}</div>;
+   const mainContent =  <div className='MainContainer'>{sideBarContent}{calendarContent}</div>;
    
     return (
  
         <div className = "basic">
           <HeaderBar/>
-          <div className='MainContainer'>
-            {mainContent} 
-          </div> 
+          {mainContent} 
         </div>
 
     );
