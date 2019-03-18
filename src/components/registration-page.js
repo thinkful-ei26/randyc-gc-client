@@ -14,7 +14,7 @@ export function RegistrationPage(props) {
     }
     return (
         <div className="LandingPageContainer">
-        <img src={goodcall} alt='goodcall app'/> 
+        <img className='logoImage' src={goodcall} alt='goodcall app'/>
             <p><b>Register for GOODCALL</b></p>
             <RegistrationForm />
             <br/>

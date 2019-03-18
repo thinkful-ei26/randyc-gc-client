@@ -17,11 +17,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+/* 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
-}
+} */
 
 .App-header {
   background-color: #282c34;
@@ -94,28 +94,12 @@
   text-align: left;
 }
  
-.Div_A {
-  float: left;
-  width: 30px;
-  height: 30px;
-  background-color: red;
-}
-
-.Div_B {
-  float: right;
-  width: 30px;
-  height: 30px;
-  background-color: blue;
-}
-
-
-
 .FormStyle {
   font-weight: 100;
   font-style: normal;
   font-family: 'Poppins', sans-serif;
-  line-height: 35px;
-  font-size: calc(5px + 2vmin);
+  line-height: 25px;
+  font-size: 18px;
   color: rgb(33, 55, 156);
   border: none;
   text-decoration: none;
@@ -144,10 +128,10 @@
   float: left;
   padding-top: 20px;
   padding-bottom: 15px;
-  padding-left: 40px;
+  padding-left: 15px;
   text-align: left;
   margin: 0, auto;
-  width: 25%;
+  width: 250px;
 }
 
 
@@ -175,7 +159,7 @@
   padding-bottom: 15px;
   text-align: center;
   margin: 0, auto;
-  width: 85%;
+  width: 300px;
 }
 
 .LandingPageContainer {
@@ -217,7 +201,7 @@
   padding-bottom: 15px;
   text-align: center;
   margin: 0, auto;
-  width: 15%;
+  width: 200px;
 }
 
 .SideBarContainer {
@@ -233,11 +217,12 @@
   font-weight: 100;
   font-style: normal; 
   font-family: 'Poppins', sans-serif;
-  line-height: 28px;
+  line-height: 22px;
   font-size: 18px;
   color: rgb(33, 55, 156);
   border-style: none;
   list-style: none;
+  padding-left: 15px;
 }
 
 .SideBarList {
@@ -282,12 +267,12 @@
 
 
 
-.HeaderBarContainer {
-  position: top;
-  /* height: 12vmin;   */
-  width: stretch;
-  background-color: rgb(255, 238, 2);
-}
+  .HeaderBarContainer {
+    position: top;
+    /* height: 12vmin;   */
+    width: stretch;
+    background-color: rgb(255, 238, 2);
+  }
 
   .HeaderBarLogoImage {
     float: left;
@@ -352,6 +337,22 @@
     border-style: none;
     list-style: none;
   }
+
+
+.SideBarList {
+  margin-left: -15px;
+  font-weight: 100;
+  font-style: normal; 
+  font-family: 'Poppins', sans-serif;
+  line-height: 18px;
+  font-size: 14px;
+  color: rgb(33, 55, 156);
+  border-style: none;
+  background-color: rgb(250, 249, 233);
+  padding: 5px;
+  border-radius: 5px;
+  list-style: none;
+}
  
 
 }

@@ -473,7 +473,7 @@ render() {
     const sideBarContent = 
           <div className='SideBarContainer'>
               <ul className='SideBarList'>
-                <li >Current user: <b>{this.props.usernameAuth}</b></li>
+                <li >User -> <b>{this.props.usernameAuth}</b></li>
                 {/* <li >Selected day is: <b>{formatDate(this.state.startDate)}</b></li>
                 <li >Start time is: <b>{formatTime(this.state.startDate)}</b></li>
                 <li >End time is: <b>{formatTime(this.state.endDate)}</b></li> */}

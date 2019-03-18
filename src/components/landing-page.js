@@ -17,7 +17,7 @@ export function LandingPage(props) {
                 <img className='logoImage' src={goodcall} alt='goodcall app'/> 
             </div>
             <p><b>GOODCALL</b> provides a simple way to share<br/>your schedule for phone calls.</p>
-            <p className='FormStyle'><b>*</b>Check it out as <b>username:</b> demo and <b>password:</b> password123</p>
+            <p className='FormStyle'><b>*</b>Check it out using <b>Username:</b> demo and <b>Password:</b> 12345</p>
             <LoginForm />
             <br/>
             <img src={OrImage} className='OrImage' alt={'or'}/>
